@@ -183,18 +183,18 @@ export default function Home() {
 
           <nav className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
             {navLinks.map((link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
+              <a key={link} href={`/${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
                 {link}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 text-sm font-medium">
-            <a href="#pricing" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
+            <a href="/login" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
               Login
             </a>
             <a
-              href="#pricing"
+              href="/signup"
               className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
             >
               <span className="text-white">Join now</span>
