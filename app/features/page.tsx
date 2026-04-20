@@ -2,7 +2,11 @@ const features = [
   {
     title: "Personalized Plans",
     text: "Smart workout splits, tailored recovery protocols, and goal frameworks that evolve as you progress.",
-    icon: "📋",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+      </svg>
+    ),
     details: [
       "Adaptive workout programming based on your performance",
       "Automatic progression and regression protocols",
@@ -13,7 +17,11 @@ const features = [
   {
     title: "AI Coaching",
     text: "Real-time suggestions for reps, pacing, nutrition timing, and consistency metrics.",
-    icon: "🤖",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
     details: [
       "Machine learning-powered form corrections",
       "Intelligent rest period recommendations",
@@ -24,7 +32,11 @@ const features = [
   {
     title: "Live Leaderboard",
     text: "Compete with peers through point-based challenges. Earn streaks and unlock tiers.",
-    icon: "🏆",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+    ),
     details: [
       "Real-time ranking updates after every workout",
       "Weekly and monthly challenge competitions",
@@ -35,7 +47,11 @@ const features = [
   {
     title: "Recovery Systems",
     text: "Sleep optimization, mobility routines, and load management tools for sustainable performance.",
-    icon: "😴",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    ),
     details: [
       "Sleep quality tracking with actionable insights",
       "Daily mobility routines tailored to your training",
@@ -46,7 +62,11 @@ const features = [
   {
     title: "Community Access",
     text: "Private challenges, coach-led groups, and a curated feed built to maintain discipline.",
-    icon: "👥",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
     details: [
       "Private accountability groups with 10-20 members",
       "Coach-led training camps and challenges",
@@ -57,7 +77,11 @@ const features = [
   {
     title: "Nutrition Tracking",
     text: "Rapid calorie logging, macro targeting, and meal guidance calibrated to your training load.",
-    icon: "🥗",
+    icon: (
+      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
     details: [
       "Barcode scanning and photo-based food logging",
       "Dynamic macro adjustments based on training intensity",
@@ -130,7 +154,7 @@ export default function Features() {
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="mb-6 text-5xl">{icon}</div>
+                  <div className="mb-6 text-gray-900">{icon}</div>
                   <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
                   <p className="mb-8 text-base leading-7 text-gray-600">{text}</p>
                   <ul className="space-y-4">
