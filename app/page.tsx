@@ -618,66 +618,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      <footer id="contact" className="border-t border-gray-100">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="sm:col-span-2 lg:col-span-1">
-              <a href="#top" className="text-lg font-bold">
-                BE-FIT
-              </a>
-              <p className="mt-4 max-w-xs text-sm leading-7 text-gray-500">
-                The advanced training platform for athletes who value consistency, data, and
-                intelligent progression.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                Product
-              </h3>
-              <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li><a href="#features" className="transition hover:text-gray-900">Features</a></li>
-                <li><a href="#pricing" className="transition hover:text-gray-900">Pricing</a></li>
-                <li><a href="#programs" className="transition hover:text-gray-900">Programs</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">Changelog</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                Company
-              </h3>
-              <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li><a href="#" className="transition hover:text-gray-900">About</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">Blog</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">Careers</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">Contact</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                Socials
-              </h3>
-              <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li><a href="#" className="transition hover:text-gray-900">Instagram</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">X (Twitter)</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">YouTube</a></li>
-                <li><a href="#" className="transition hover:text-gray-900">TikTok</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-8 text-xs text-gray-400 sm:flex-row">
-            <span>&copy; 2026 BE-FIT. All rights reserved.</span>
-            <div className="flex gap-6">
-              <a href="#" className="transition hover:text-gray-600">Privacy</a>
-              <a href="#" className="transition hover:text-gray-600">Terms</a>
-              <a href="#" className="transition hover:text-gray-600">Cookies</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
