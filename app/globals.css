@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  --background: #fafafa;
+  --foreground: #000000;
+  --muted: #f0f0f0;
+  --border: #e8e8e8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,12 +19,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   min-height: 100vh;
+  line-height: 1.6;
 }
 
 ::selection {
-  background: rgba(55, 65, 81, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   color: #ffffff;
 }
 
@@ -37,11 +42,11 @@ a {
   text-decoration: none;
 }
 
-/* Swiss-style subtle animations */
+/* Swiss-style refined animations - more subtle */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -57,7 +62,7 @@ a {
 @keyframes slide-in-right {
   from {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(16px);
   }
   to {
     opacity: 1;
@@ -68,7 +73,7 @@ a {
 @keyframes count-up {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
@@ -86,29 +91,29 @@ a {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
+  animation: fade-up 0.7s ease-out both;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.8s ease-out both;
+  animation: fade-in 1s ease-out both;
 }
 
 .animate-slide-right {
-  animation: slide-in-right 0.5s ease-out both;
+  animation: slide-in-right 0.6s ease-out both;
 }
 
 .animate-count-up {
-  animation: count-up 0.5s ease-out both;
+  animation: count-up 0.7s ease-out both;
 }
 
 .animate-bar-grow {
-  animation: bar-grow 0.8s ease-out both;
+  animation: bar-grow 1s ease-out both;
   transform-origin: bottom;
 }
 
-.stagger-1 { animation-delay: 0.05s; }
-.stagger-2 { animation-delay: 0.1s; }
-.stagger-3 { animation-delay: 0.15s; }
-.stagger-4 { animation-delay: 0.2s; }
-.stagger-5 { animation-delay: 0.25s; }
-.stagger-6 { animation-delay: 0.3s; }
+.stagger-1 { animation-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.4s; }
+.stagger-6 { animation-delay: 0.48s; }
