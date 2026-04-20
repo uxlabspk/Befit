@@ -460,7 +460,7 @@ export default function Home() {
             <div className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
               Pricing
             </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Select your plan.
             </h2>
             <p className="mt-4 text-base text-gray-500">
@@ -474,35 +474,35 @@ export default function Home() {
                 key={name}
                 className={`animate-fade-up stagger-${i + 1} rounded-lg border p-8 transition-all duration-300 hover:-translate-y-1 ${
                   highlighted
-                    ? "border-gray-950 bg-gray-950 shadow-md hover:shadow-lg"
-                    : "border-gray-200 bg-white hover:shadow-md"
+                    ? "border-2 border-gray-900 bg-gray-50 shadow-md"
+                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md"
                 }`}
               >
                 {highlighted && (
-                  <div className="mb-4 inline-block rounded bg-white/10 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-white">
+                  <div className="mb-4 inline-block rounded bg-gray-900 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-white">
                     Recommended
                   </div>
                 )}
-                <h3 className="text-lg font-semibold text-white">{name}</h3>
+                <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
                 <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-3xl font-bold text-white">{price}</span>
-                  <span className="text-sm text-gray-400">{period}</span>
+                  <span className="text-3xl font-bold text-gray-900">{price}</span>
+                  <span className="text-sm text-gray-500">{period}</span>
                 </div>
-                <p className="mt-3 text-sm text-gray-400">{description}</p>
-                <ul className="mt-8 space-y-3 text-sm text-gray-300">
+                <p className="mt-3 text-sm text-gray-600">{description}</p>
+                <ul className="mt-8 space-y-3 text-sm text-gray-600">
                   {planFeatures.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-white" />
+                      <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-900" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#contact"
-                  className={`mt-8 inline-flex w-full items-center justify-center rounded-md px-5 py-3 text-sm font-semibold transition ${
+                  className={`mt-8 inline-flex w-full items-center justify-center rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-200 ${
                     highlighted
-                      ? "bg-white text-gray-950 hover:bg-gray-100"
-                      : "border border-gray-950 text-gray-950 hover:bg-gray-950 hover:text-white"
+                      ? "bg-gray-900 text-white hover:bg-gray-800"
+                      : "border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
                   }`}
                 >
                   {cta}
