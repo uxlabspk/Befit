@@ -201,7 +201,7 @@ export default function Home() {
               href="/signup"
               className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
-              Join now
+              <span className="text-white">Join Now</span>
             </a>
           </div>
         </div>
@@ -230,7 +230,7 @@ export default function Home() {
                 href="#pricing"
                 className="inline-flex items-center justify-center rounded-md bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--foreground)]/[0.9] hover:shadow-lg"
               >
-                Start training
+                <span className="text-white">Start Training</span>
               </a>
               <a
                 href="#features"
@@ -489,11 +489,6 @@ export default function Home() {
                     : "bg-white hover:border-[var(--foreground)]/[0.1] hover:shadow-md"
                 }`}
               >
-                {highlighted && (
-                  <div className="mb-4 inline-flex items-center rounded-[var(--foreground)] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-white">
-                    Recommended
-                  </div>
-                )}
                 <h3 className="text-lg font-semibold tracking-tighter text-[var(--foreground)]">{name}</h3>
                 <div className="mt-3 flex items-baseline gap-2">
                   <span className="text-3xl font-bold tracking-tighter text-[var(--foreground)]">{price}</span>
@@ -510,11 +505,7 @@ export default function Home() {
                 </ul>
                 <a
                   href="#contact"
-                  className={`mt-10 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 ${
-                    highlighted
-                      ? "bg-[var(--foreground)] text-white hover:bg-[var(--foreground)]/[0.9]"
-                      : "border border-[var(--foreground)]/[0.2] text-[var(--foreground)]/[0.8] hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]"
-                  }`}
+                  className={`mt-10 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 border border-[var(--foreground)]/[0.2] text-[var(--foreground)]/[0.8] hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]`}
                 >
                   {cta}
                 </a>
@@ -536,16 +527,10 @@ export default function Home() {
             </p>
             <div className="mt-12 flex items-center justify-center gap-6">
               <a
-                href="#pricing"
-                className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.9] hover:shadow-md"
+                href="/pricing"
+                className="w-64 border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
               >
                 Get started
-              </a>
-              <a
-                href="#contact"
-                className="border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
-              >
-                Contact us
               </a>
             </div>
           </div>
