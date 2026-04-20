@@ -528,11 +528,11 @@ export default function Home() {
                 href="#pricing"
                 className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-lg"
               >
-                Get started free
+                <span className="text-gray-950">Get started</span>
               </a>
               <a
                 href="#contact"
-                className="rounded px-6 py-3 text-sm font-medium text-gray-300 transition hover:text-white"
+                className="border rounded-md px-6 py-3 text-sm font-medium text-gray-300 transition hover:text-white"
               >
                 Contact us
               </a>
