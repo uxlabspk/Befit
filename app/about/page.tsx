@@ -59,47 +59,51 @@ const navLinks = ["Programs", "Features", "Pricing", "About"];
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Navigation */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] bg-white/[0.95] backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="/" className="text-lg font-bold tracking-tight">
+          <a href="/" className="block text-lg font-bold tracking-tighter">
             BE-FIT
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--foreground)]/[0.6]">
             {navLinks.map((link) => (
-              <a key={link} href={`/${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
+              <a 
+                key={link} 
+                href={`/${link.toLowerCase()}`} 
+                className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--foreground)] after:transition-all after:duration-200 hover:text-[var(--foreground)] hover:after:w-full transition-colors duration-200"
+              >
                 {link}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 text-sm font-medium">
-            <a href="/login" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
+            <a href="/login" className="rounded px-4 py-2 text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]">
               Login
             </a>
             <a
               href="/signup"
-              className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
-              <span className="text-white">Join now</span>
+              Join now
             </a>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="border-b border-gray-100 pt-20">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-b border-[var(--border)] pt-24">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               About us
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
               Building the future of intelligent fitness.
             </h1>
-            <p className="mt-6 text-lg text-gray-500">
+            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
               We're on a mission to make world-class fitness coaching accessible to everyone, powered by science, technology, and community.
             </p>
           </div>
@@ -108,10 +112,10 @@ export default function About() {
 
       {/* Our Story */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-3xl font-bold tracking-tight">Our story</h2>
-            <div className="space-y-6 text-base leading-8 text-gray-600">
+            <h2 className="mb-10 text-3xl font-bold tracking-tighter">Our story</h2>
+            <div className="space-y-8 text-base leading-7 text-[var(--foreground)]/[0.6]">
               <p>
                 BE-FIT was born from a simple frustration: personalized fitness coaching was either prohibitively expensive or completely inaccessible to most people. We knew there had to be a better way.
               </p>
@@ -127,20 +131,20 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">Our journey</h2>
+      <section className="border-t border-[var(--border)] bg-[var(--muted)]">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
+          <h2 className="mb-16 text-center text-3xl font-bold tracking-tighter">Our journey</h2>
           <div className="mx-auto max-w-3xl">
-            <div className="space-y-8">
+            <div className="space-y-10">
               {milestones.map(({ year, event }) => (
-                <div key={year} className="flex gap-6">
+                <div key={year} className="flex gap-8">
                   <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 text-sm font-bold text-white">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--foreground)] text-sm font-bold text-white">
                       {year}
                     </div>
                   </div>
-                  <div className="flex-grow border-l-2 border-gray-200 pl-6 pt-2">
-                    <p className="text-base text-gray-700">{event}</p>
+                  <div className="flex-grow border-l-2 border-[var(--foreground)]/[0.1] pl-6 pt-2">
+                    <p className="text-base text-[var(--foreground)]/[0.7]">{event}</p>
                   </div>
                 </div>
               ))}
@@ -151,22 +155,22 @@ export default function About() {
 
       {/* Values */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight">What we believe</h2>
-            <p className="text-base text-gray-500">
+            <h2 className="mb-6 text-3xl font-bold tracking-tighter">What we believe</h2>
+            <p className="mt-4 text-base text-[var(--foreground)]/[0.5]">
               Our core values guide every decision we make and every feature we build.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {values.map(({ title, description }) => (
               <div
                 key={title}
-                className="rounded-lg border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="rounded-lg border border-[var(--border)] bg-white p-10 transition-all duration-350 hover:-translate-y-0.5 hover:shadow-md"
               >
-                <h3 className="mb-3 text-xl font-bold">{title}</h3>
-                <p className="text-sm leading-7 text-gray-600">{description}</p>
+                <h3 className="mb-4 text-xl font-bold tracking-tighter">{title}</h3>
+                <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{description}</p>
               </div>
             ))}
           </div>
@@ -174,24 +178,24 @@ export default function About() {
       </section>
 
       {/* Team */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-t border-[var(--border)] bg-[var(--muted)]">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight">Meet the team</h2>
-            <p className="text-base text-gray-500">
+            <h2 className="mb-6 text-3xl font-bold tracking-tighter">Meet the team</h2>
+            <p className="mt-4 text-base text-[var(--foreground)]/[0.5]">
               The passionate people behind BE-FIT's mission to transform fitness.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {teamMembers.map(({ name, role, bio }) => (
               <div key={name} className="text-center">
-                <div className="mx-auto mb-5 grid h-32 w-32 place-items-center rounded-full border-2 border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
-                  <span className="text-2xl font-bold text-gray-300">{name.charAt(0)}</span>
+                <div className="mx-auto mb-6 grid h-36 w-36 place-items-center rounded-full border-[1px] border-[var(--border)] bg-[var(--background)] shadow-sm transition-all duration-300 hover:border-[var(--foreground)]/[0.2] hover:shadow-sm">
+                  <span className="text-2xl font-bold text-[var(--foreground)]/[0.6]">{name.charAt(0)}</span>
                 </div>
-                <h3 className="text-lg font-bold">{name}</h3>
-                <p className="mt-1 text-sm font-medium text-gray-500">{role}</p>
-                <p className="mt-3 text-sm leading-7 text-gray-600">{bio}</p>
+                <h3 className="text-lg font-bold tracking-tighter">{name}</h3>
+                <p className="mt-1.5 text-sm font-medium text-[var(--foreground)]/[0.5]">{role}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--foreground)]/[0.6]">{bio}</p>
               </div>
             ))}
           </div>
@@ -200,8 +204,8 @@ export default function About() {
 
       {/* Stats */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="grid gap-8 rounded-lg border border-gray-200 bg-gray-50 p-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
+          <div className="grid gap-10 rounded-lg border border-[var(--border)] bg-[var(--muted)] p-14 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { value: "10,000+", label: "Active members" },
               { value: "500,000+", label: "Workouts completed" },
@@ -209,8 +213,8 @@ export default function About() {
               { value: "24/7", label: "AI coaching available" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-4xl font-bold tracking-tight">{stat.value}</div>
-                <div className="mt-2 text-sm text-gray-600">{stat.label}</div>
+                <div className="block text-4xl font-bold tracking-tighter">{stat.value}</div>
+                <div className="mt-3 block text-sm text-[var(--foreground)]/[0.6]">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -218,24 +222,24 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-100 bg-gray-950 text-white">
-        <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      <section className="border-t border-[var(--border)] bg-[var(--foreground)] text-white">
+        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Join the BE-FIT movement
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-400">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/[0.8]">
             Be part of a community that's redefining what's possible through intelligent training and unwavering consistency.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-12 flex items-center justify-center gap-6">
             <a
               href="/signup"
-              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition hover:bg-gray-100"
+              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.9] hover:shadow-md"
             >
               Get started today
             </a>
             <a
               href="/programs"
-              className="rounded-md border border-gray-700 px-6 py-3 text-sm font-medium text-gray-300 transition hover:text-white"
+              className="border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
             >
               Explore programs
             </a>

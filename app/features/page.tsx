@@ -95,47 +95,51 @@ const navLinks = ["Programs", "Features", "Pricing", "About"];
 
 export default function Features() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Navigation */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] bg-white/[0.95] backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="/" className="text-lg font-bold tracking-tight">
+          <a href="/" className="block text-lg font-bold tracking-tighter">
             BE-FIT
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--foreground)]/[0.6]">
             {navLinks.map((link) => (
-              <a key={link} href={`/${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
+              <a 
+                key={link} 
+                href={`/${link.toLowerCase()}`} 
+                className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--foreground)] after:transition-all after:duration-200 hover:text-[var(--foreground)] hover:after:w-full transition-colors duration-200"
+              >
                 {link}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 text-sm font-medium">
-            <a href="/login" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
+            <a href="/login" className="rounded px-4 py-2 text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]">
               Login
             </a>
             <a
               href="/signup"
-              className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
-              <span className="text-white">Join now</span>
+              Join now
             </a>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="border-b border-gray-100 pt-20">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-b border-[var(--border)] pt-24">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Features
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
               Everything you need to train smarter.
             </h1>
-            <p className="mt-6 text-lg text-gray-500">
+            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
               Built on a foundation of sports science and behavioral psychology. Every feature is designed to keep you consistent, motivated, and progressing.
             </p>
           </div>
@@ -144,69 +148,69 @@ export default function Features() {
 
       {/* Features Grid */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="space-y-24">
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
+          <div className="space-y-28">
             {features.map(({ title, text, icon, details }, index) => (
               <div
                 key={title}
-                className={`grid gap-12 lg:grid-cols-2 lg:gap-16 ${
+                className={`grid gap-14 lg:grid-cols-2 lg:gap-20 ${
                   index % 2 === 1 ? "lg:direction-rtl" : ""
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="mb-6 text-gray-900">{icon}</div>
-                  <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-                  <p className="mb-8 text-base leading-7 text-gray-600">{text}</p>
-                  <ul className="space-y-4">
+                  <div className="mb-8 text-[var(--foreground)]">{icon}</div>
+                  <h2 className="mb-5 text-3xl font-bold tracking-tighter sm:text-4xl">{title}</h2>
+                  <p className="mb-10 text-base leading-7 text-[var(--foreground)]/[0.6]">{text}</p>
+                  <ul className="space-y-5">
                     {details.map((detail) => (
-                      <li key={detail} className="flex items-start gap-3">
-                        <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-gray-900" />
-                        <span className="text-sm text-gray-700">{detail}</span>
+                      <li key={detail} className="flex items-start gap-4">
+                        <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
+                        <span className="text-sm text-[var(--foreground)]/[0.6]">{detail}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div className={`flex items-center justify-center ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="w-full max-w-md rounded-lg border border-gray-200 bg-gray-50 p-8">
-                    <div className="mb-6 flex items-center justify-between text-xs font-medium uppercase tracking-wider text-gray-400">
+                  <div className="w-full max-w-md rounded-lg border border-[var(--border)] bg-[var(--background)] p-10">
+                    <div className="mb-8 flex items-center justify-between text-xs font-medium uppercase tracking-wider text-[var(--foreground)]/[0.4]">
                       <span>{title} preview</span>
-                      <span className="rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[0.65rem]">
+                      <span className="rounded-full border border-[var(--border)] bg-[var(--foreground)] px-2.5 py-0.5 text-[0.65rem]">
                         Active
                       </span>
                     </div>
                     {title === "Personalized Plans" && (
-                      <div className="space-y-4">
-                        <div className="rounded bg-white p-4 shadow-sm">
-                          <div className="text-sm font-semibold">Current Program</div>
-                          <div className="mt-1 text-xs text-gray-500">Push/Pull/Legs - Week 3 of 6</div>
-                          <div className="mt-3 h-2 w-full rounded-full bg-gray-200">
-                            <div className="h-2 w-1/2 rounded-full bg-gray-900" />
+                      <div className="space-y-5">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+                          <div className="text-sm font-semibold text-[var(--foreground)]/[0.5]">Current Program</div>
+                          <div className="mt-2 text-xs text-[var(--foreground)]/[0.4]">Push/Pull/Legs - Week 3 of 6</div>
+                          <div className="mt-4 h-2.5 w-full rounded-full bg-[var(--muted)]">
+                            <div className="h-2.5 w-1/2 rounded-full bg-[var(--foreground)]" />
                           </div>
                         </div>
-                        <div className="rounded bg-white p-4 shadow-sm">
-                          <div className="text-sm font-semibold">Next Session</div>
-                          <div className="mt-1 text-xs text-gray-500">Pull Day - Tomorrow, 6:00 AM</div>
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+                          <div className="text-sm font-semibold text-[var(--foreground)]/[0.5]">Next Session</div>
+                          <div className="mt-2 text-xs text-[var(--foreground)]/[0.4]">Pull Day - Tomorrow, 6:00 AM</div>
                         </div>
                       </div>
                     )}
                     {title === "AI Coaching" && (
-                      <div className="space-y-3">
-                        <div className="rounded bg-white p-3 shadow-sm">
-                          <div className="text-xs font-semibold">AI Suggestion</div>
-                          <div className="mt-2 text-xs text-gray-600">
+                      <div className="space-y-4">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-5">
+                          <div className="text-xs font-semibold text-[var(--foreground)]/[0.4]">AI Suggestion</div>
+                          <div className="mt-3 text-xs text-[var(--foreground)]/[0.6]">
                             "Increase weight by 2.5kg on bench press. Your last 3 sessions show consistent form."
                           </div>
                         </div>
-                        <div className="rounded bg-white p-3 shadow-sm">
-                          <div className="text-xs font-semibold">Consistency Score</div>
-                          <div className="mt-2 text-2xl font-bold">94%</div>
-                          <div className="text-xs text-gray-500">Last 30 days</div>
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-5">
+                          <div className="text-xs font-semibold text-[var(--foreground)]/[0.4]">Consistency Score</div>
+                          <div className="mt-2 text-3xl font-bold text-[var(--foreground)]">94%</div>
+                          <div className="text-xs text-[var(--foreground)]/[0.5]">Last 30 days</div>
                         </div>
                       </div>
                     )}
                     {title === "Live Leaderboard" && (
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         {[
                           { rank: 1, name: "Alex T.", points: "12,450" },
                           { rank: 2, name: "Sarah P.", points: "11,890" },
@@ -214,66 +218,68 @@ export default function Features() {
                         ].map((user) => (
                           <div
                             key={user.rank}
-                            className={`rounded p-3 shadow-sm ${
-                              user.highlighted ? "bg-gray-900 text-white" : "bg-white"
+                            className={`rounded-lg border p-5 ${
+                              user.highlighted 
+                                ? "border-[var(--foreground)] bg-[var(--muted)] text-[var(--foreground)]" 
+                                : "border-[var(--border)] bg-white text-[var(--foreground)]/[0.8]"
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs font-bold">#{user.rank}</span>
-                                <span className="text-xs font-semibold">{user.name}</span>
+                              <div className="flex items-center gap-3">
+                                <span className="text-xs font-bold text-[var(--foreground)]/[0.5]">#{user.rank}</span>
+                                <span className="text-xs font-semibold text-[var(--foreground)]">{user.name}</span>
                               </div>
-                              <span className="text-xs font-medium">{user.points} pts</span>
+                              <span className="text-xs font-medium text-[var(--foreground)]/[0.6]">{user.points} pts</span>
                             </div>
                           </div>
                         ))}
                       </div>
                     )}
                     {title === "Recovery Systems" && (
-                      <div className="space-y-4">
-                        <div className="rounded bg-white p-4 shadow-sm">
-                          <div className="text-sm font-semibold">Sleep Quality</div>
-                          <div className="mt-2 text-2xl font-bold">7.5 hrs</div>
-                          <div className="mt-1 text-xs text-gray-500">Above average ✓</div>
+                      <div className="space-y-5">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+                          <div className="text-sm font-semibold text-[var(--foreground)]/[0.5]">Sleep Quality</div>
+                          <div className="mt-3 text-2xl font-bold text-[var(--foreground)]">7.5 hrs</div>
+                          <div className="mt-1 text-xs text-[var(--foreground)]/[0.5]">Above average ✓</div>
                         </div>
-                        <div className="rounded bg-white p-4 shadow-sm">
-                          <div className="text-sm font-semibold">Today's Mobility</div>
-                          <div className="mt-1 text-xs text-gray-500">Hip flexors & thoracic spine - 15 min</div>
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+                          <div className="text-sm font-semibold text-[var(--foreground)]/[0.5]">Today's Mobility</div>
+                          <div className="mt-2 text-xs text-[var(--foreground)]/[0.4]">Hip flexors & thoracic spine - 15 min</div>
                         </div>
                       </div>
                     )}
                     {title === "Community Access" && (
-                      <div className="space-y-3">
-                        <div className="rounded bg-white p-3 shadow-sm">
-                          <div className="text-xs font-semibold">Your Group</div>
-                          <div className="mt-2 text-xs text-gray-600">
+                      <div className="space-y-4">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-5">
+                          <div className="text-xs font-semibold text-[var(--foreground)]/[0.4]">Your Group</div>
+                          <div className="mt-3 text-xs text-[var(--foreground)]/[0.6]">
                             "Morning Warriors - 15 members active"
                           </div>
                         </div>
-                        <div className="rounded bg-white p-3 shadow-sm">
-                          <div className="text-xs font-semibold">Current Challenge</div>
-                          <div className="mt-1 text-xs text-gray-600">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-5">
+                          <div className="text-xs font-semibold text-[var(--foreground)]/[0.4]">Current Challenge</div>
+                          <div className="mt-1 text-xs text-[var(--foreground)]/[0.6]">
                             "30-Day Consistency Streak - Day 18/30"
                           </div>
                         </div>
                       </div>
                     )}
                     {title === "Nutrition Tracking" && (
-                      <div className="space-y-4">
-                        <div className="rounded bg-white p-4 shadow-sm">
-                          <div className="text-sm font-semibold">Today's Macros</div>
-                          <div className="mt-2 grid grid-cols-3 gap-2 text-center">
+                      <div className="space-y-5">
+                        <div className="rounded-lg border border-[var(--border)] bg-white p-6">
+                          <div className="text-sm font-semibold text-[var(--foreground)]/[0.5]">Today's Macros</div>
+                          <div className="mt-3 grid grid-cols-3 gap-3 text-center">
                             <div>
-                              <div className="text-xs text-gray-500">Protein</div>
-                              <div className="text-sm font-bold">145g</div>
+                              <div className="text-xs text-[var(--foreground)]/[0.4]">Protein</div>
+                              <div className="text-sm font-bold text-[var(--foreground)]">145g</div>
                             </div>
                             <div>
-                              <div className="text-xs text-gray-500">Carbs</div>
-                              <div className="text-sm font-bold">210g</div>
+                              <div className="text-xs text-[var(--foreground)]/[0.4]">Carbs</div>
+                              <div className="text-sm font-bold text-[var(--foreground)]">210g</div>
                             </div>
                             <div>
-                              <div className="text-xs text-gray-500">Fats</div>
-                              <div className="text-sm font-bold">65g</div>
+                              <div className="text-xs text-[var(--foreground)]/[0.4]">Fats</div>
+                              <div className="text-sm font-bold text-[var(--foreground)]">65g</div>
                             </div>
                           </div>
                         </div>
@@ -288,24 +294,24 @@ export default function Features() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      <section className="border-t border-[var(--border)] bg-[var(--muted)]">
+        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Ready to experience all these features?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-500">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-[var(--foreground)]/[0.5]">
             Start your free trial today and unlock the full power of intelligent fitness tracking.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-12 flex items-center justify-center gap-6">
             <a
               href="/signup"
-              className="inline-flex items-center justify-center rounded-md bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
+              className="inline-flex items-center justify-center rounded-md bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
               Start free trial
             </a>
             <a
               href="/pricing"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-600 transition hover:text-gray-900"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]"
             >
               View pricing &rarr;
             </a>

@@ -47,47 +47,51 @@ const navLinks = ["Programs", "Features", "Pricing", "About"];
 
 export default function Programs() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Navigation */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] bg-white/[0.95] backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="/" className="text-lg font-bold tracking-tight">
+          <a href="/" className="block text-lg font-bold tracking-tighter">
             BE-FIT
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--foreground)]/[0.6]">
             {navLinks.map((link) => (
-              <a key={link} href={`/${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
+              <a 
+                key={link} 
+                href={`/${link.toLowerCase()}`} 
+                className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--foreground)] after:transition-all after:duration-200 hover:text-[var(--foreground)] hover:after:w-full transition-colors duration-200"
+              >
                 {link}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 text-sm font-medium">
-            <a href="/login" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
+            <a href="/login" className="rounded px-4 py-2 text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]">
               Login
             </a>
             <a
               href="/signup"
-              className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
-              <span className="text-white">Join now</span>
+              Join now
             </a>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="border-b border-gray-100 pt-20">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-b border-[var(--border)] pt-24">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Training programs
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
               Choose your training path.
             </h1>
-            <p className="mt-6 text-lg text-gray-500">
+            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
               Three evidence-based approaches designed to fit your lifestyle, equipment access, and goals. Every program adapts to your progress.
             </p>
           </div>
@@ -96,49 +100,49 @@ export default function Programs() {
 
       {/* Programs Detail */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="space-y-24">
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
+          <div className="space-y-28">
             {programs.map(({ name, code, description, details, fullDescription, idealFor, equipment }, index) => (
               <article
                 key={code}
-                className={`grid gap-12 lg:grid-cols-2 lg:gap-16 ${
+                className={`grid gap-14 lg:grid-cols-2 lg:gap-20 ${
                   index % 2 === 1 ? "lg:direction-rtl" : ""
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="mb-4 text-xs font-mono text-gray-400">{code}</div>
-                  <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">{name}</h2>
-                  <p className="mb-6 text-base leading-7 text-gray-600">{fullDescription}</p>
-                  <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-6">
+                  <div className="mb-5 text-xs font-mono text-[var(--foreground)]/[0.3]">{code}</div>
+                  <h2 className="mb-5 text-3xl font-bold tracking-tighter sm:text-4xl">{name}</h2>
+                  <p className="mb-8 text-base leading-7 text-[var(--foreground)]/[0.6]">{fullDescription}</p>
+                  <div className="space-y-6 rounded-lg border border-[var(--border)] bg-[var(--muted)] p-8">
                     <div>
-                      <div className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                      <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]/[0.4]">
                         Ideal for
                       </div>
-                      <div className="mt-1 text-sm font-medium text-gray-900">{idealFor}</div>
+                      <div className="mt-1 text-sm font-medium text-[var(--foreground)]/[0.5]">{idealFor}</div>
                     </div>
-                    <div>
-                      <div className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    <div className="mt-4">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]/[0.4]">
                         Equipment
                       </div>
-                      <div className="mt-1 text-sm font-medium text-gray-900">{equipment}</div>
+                      <div className="mt-1 text-sm font-medium text-[var(--foreground)]/[0.5]">{equipment}</div>
                     </div>
                   </div>
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
-                    <h3 className="mb-6 text-lg font-semibold">Program includes:</h3>
-                    <ul className="mb-8 space-y-4 text-sm text-gray-600">
+                  <div className="rounded-lg border border-[var(--border)] bg-[var(--background)] p-10">
+                    <h3 className="mb-7 text-lg font-semibold tracking-tighter">Program includes:</h3>
+                    <ul className="mb-9 space-y-5 text-sm text-[var(--foreground)]/[0.5]">
                       {details.map((detail) => (
-                        <li key={detail} className="flex items-start gap-3">
-                          <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-gray-900" />
-                          <span>{detail}</span>
+                        <li key={detail} className="flex items-start gap-4">
+                          <span className="mt-0.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
+                          <span className="text-sm text-[var(--foreground)]/[0.6]">{detail}</span>
                         </li>
                       ))}
                     </ul>
                     <a
                       href="/pricing"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
+                      className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-[var(--foreground)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-colors duration-200 hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]/[0.9]"
                     >
                       Get started with {name}
                     </a>

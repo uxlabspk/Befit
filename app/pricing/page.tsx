@@ -77,47 +77,51 @@ const navLinks = ["Programs", "Features", "Pricing", "About"];
 
 export default function Pricing() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Navigation */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] bg-white/[0.95] backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="/" className="text-lg font-bold tracking-tight">
+          <a href="/" className="block text-lg font-bold tracking-tighter">
             BE-FIT
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--foreground)]/[0.6]">
             {navLinks.map((link) => (
-              <a key={link} href={`/${link.toLowerCase()}`} className="relative transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gray-900 after:transition-all after:duration-200 hover:text-gray-900 hover:after:w-full">
+              <a 
+                key={link} 
+                href={`/${link.toLowerCase()}`} 
+                className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--foreground)] after:transition-all after:duration-200 hover:text-[var(--foreground)] hover:after:w-full transition-colors duration-200"
+              >
                 {link}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 text-sm font-medium">
-            <a href="/login" className="rounded px-4 py-2 text-gray-600 transition hover:text-gray-900">
+            <a href="/login" className="rounded px-4 py-2 text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]">
               Login
             </a>
             <a
               href="/signup"
-              className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--foreground)]/[0.9]"
             >
-              <span className="text-white">Join now</span>
+              Join now
             </a>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="border-b border-gray-100 pt-20">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-b border-[var(--border)] pt-24">
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Pricing
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
               Select your plan.
             </h1>
-            <p className="mt-6 text-lg text-gray-500">
+            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
               Transparent pricing. No hidden fees. Cancel anytime. Start with a 14-day free trial.
             </p>
           </div>
@@ -126,45 +130,45 @@ export default function Pricing() {
 
       {/* Pricing Cards */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-3">
             {pricingPlans.map(({ name, price, period, description, features: planFeatures, cta, highlighted, bestFor }) => (
               <article
                 key={name}
-                className={`rounded-lg border p-8 transition-all duration-300 hover:-translate-y-1 ${
+                className={`rounded-lg border border-[var(--border)] p-10 transition-all duration-350 hover:-translate-y-0.5 ${
                   highlighted
-                    ? "border-2 border-gray-900 bg-gray-50 shadow-lg"
-                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md"
+                    ? "border-[var(--foreground)] bg-[var(--muted)] shadow-md"
+                    : "bg-white hover:border-[var(--foreground)]/[0.1] hover:shadow-md"
                 }`}
               >
                 {highlighted && (
-                  <div className="mb-4 inline-block rounded bg-gray-900 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white">
+                  <div className="mb-5 inline-flex items-center rounded-[var(--foreground)] px-4 py-1.5 text-[0.65rem] font-semibold uppercase tracking-wider text-white">
                     Most Popular
                   </div>
                 )}
-                <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
-                <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-gray-900">{price}</span>
-                  <span className="text-sm text-gray-500">{period}</span>
+                <h3 className="text-xl font-semibold tracking-tighter text-[var(--foreground)]">{name}</h3>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="text-4xl font-bold tracking-tighter text-[var(--foreground)]">{price}</span>
+                  <span className="mt-0.5 text-sm text-[var(--foreground)]/[0.5]">{period}</span>
                 </div>
-                <p className="mt-4 text-sm text-gray-600">{description}</p>
-                <p className="mt-2 text-xs font-medium text-gray-500">{bestFor}</p>
-                
-                <ul className="mt-8 space-y-4 text-sm text-gray-600">
+                <p className="mt-5 text-base text-[var(--foreground)]/[0.6]">{description}</p>
+                <p className="mt-3 text-xs font-medium text-[var(--foreground)]/[0.5]">{bestFor}</p>
+                 
+                <ul className="mt-10 space-y-5 text-sm text-[var(--foreground)]/[0.5]">
                   {planFeatures.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-gray-900" />
-                      <span>{feature}</span>
+                    <li key={feature} className="flex items-start gap-4">
+                      <span className="mt-0.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
+                      <span className="text-sm text-[var(--foreground)]/[0.6]">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                
+                 
                 <a
                   href="/signup"
-                  className={`mt-8 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 ${
+                  className={`mt-12 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 ${
                     highlighted
-                      ? "bg-gray-900 text-white hover:bg-gray-800"
-                      : "border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
+                      ? "bg-[var(--foreground)] text-white hover:bg-[var(--foreground)]/[0.9]"
+                      : "border border-[var(--foreground)]/[0.2] text-[var(--foreground)]/[0.8] hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]"
                   }`}
                 >
                   {cta}
@@ -176,23 +180,23 @@ export default function Pricing() {
       </section>
 
       {/* Comparison Table */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <section className="border-t border-[var(--border)] bg-[var(--muted)]">
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
+            <h2 className="mb-16 text-center text-3xl font-bold tracking-tighter">
               Compare plans in detail
             </h2>
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-              <table className="w-full text-sm">
-                <thead className="border-b border-gray-200 bg-gray-50">
+            <div className="overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--background)]">
+              <table className="w-full text-base">
+                <thead className="border-b border-[var(--border)] bg-[var(--muted)]">
                   <tr>
-                    <th className="px-6 py-4 text-left font-semibold">Feature</th>
-                    <th className="px-6 py-4 text-center font-semibold">Starter</th>
-                    <th className="px-6 py-4 text-center font-semibold">Pro</th>
-                    <th className="px-6 py-4 text-center font-semibold">Elite</th>
+                    <th className="px-6 py-4 text-left font-semibold text-[var(--foreground)]">Feature</th>
+                    <th className="px-6 py-4 text-center font-semibold text-[var(--foreground)]">Starter</th>
+                    <th className="px-6 py-4 text-center font-semibold text-[var(--foreground)]">Pro</th>
+                    <th className="px-6 py-4 text-center font-semibold text-[var(--foreground)]">Elite</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-[var(--border)]">
                   {[
                     { feature: "Workout Plans", starter: "Basic", pro: "AI-Powered", elite: "Custom" },
                     { feature: "Calorie Tracking", starter: "✓", pro: "✓", elite: "✓" },
@@ -205,11 +209,11 @@ export default function Pricing() {
                     { feature: "Form Reviews", starter: "—", pro: "—", elite: "Bi-weekly" },
                     { feature: "Support", starter: "Community", pro: "Priority", elite: "Dedicated" },
                   ].map((row) => (
-                    <tr key={row.feature} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 font-medium">{row.feature}</td>
-                      <td className="px-6 py-4 text-center text-gray-600">{row.starter}</td>
-                      <td className="px-6 py-4 text-center text-gray-600">{row.pro}</td>
-                      <td className="px-6 py-4 text-center text-gray-600">{row.elite}</td>
+                    <tr key={row.feature} className="hover:bg-[var(--muted)]">
+                      <td className="px-6 py-4 font-medium text-[var(--foreground)]/[0.7]">{row.feature}</td>
+                      <td className="px-6 py-4 text-center text-[var(--foreground)]/[0.6]">{row.starter}</td>
+                      <td className="px-6 py-4 text-center text-[var(--foreground)]/[0.6]">{row.pro}</td>
+                      <td className="px-6 py-4 text-center text-[var(--foreground)]/[0.6]">{row.elite}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -221,16 +225,16 @@ export default function Pricing() {
 
       {/* FAQ Section */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
+            <h2 className="mb-16 text-center text-3xl font-bold tracking-tighter">
               Frequently asked questions
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-8">
               {faqs.map(({ question, answer }) => (
-                <div key={question} className="rounded-lg border border-gray-200 bg-white p-6">
-                  <h3 className="mb-2 text-lg font-semibold">{question}</h3>
-                  <p className="text-sm leading-7 text-gray-600">{answer}</p>
+                <div key={question} className="rounded-lg border border-[var(--border)] bg-white p-8">
+                  <h3 className="mb-3 text-lg font-semibold text-[var(--foreground)]">{question}</h3>
+                  <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{answer}</p>
                 </div>
               ))}
             </div>
@@ -239,24 +243,24 @@ export default function Pricing() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-100 bg-gray-950 text-white">
-        <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      <section className="border-t border-[var(--border)] bg-[var(--foreground)] text-white">
+        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Still have questions?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-400">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/[0.8]">
             Our team is here to help you choose the perfect plan for your fitness goals.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-12 flex items-center justify-center gap-6">
             <a
               href="/signup"
-              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition hover:bg-gray-100"
+              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.9] hover:shadow-md"
             >
               Start free trial
             </a>
             <a
               href="/about"
-              className="rounded-md border border-gray-700 px-6 py-3 text-sm font-medium text-gray-300 transition hover:text-white"
+              className="border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
             >
               Contact us
             </a>

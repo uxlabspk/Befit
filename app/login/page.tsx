@@ -2,40 +2,40 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[var(--background)]">
       {/* Full-screen auth container */}
       <div className="flex min-h-screen flex-col lg:flex-row">
         {/* Left side - Branding */}
-        <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
+        <div className="hidden flex-col justify-between bg-[var(--foreground)]/[0.05] p-12 text-[var(--foreground)] lg:flex lg:w-1/2">
           <div>
-            <Link href="/" className="text-2xl font-bold tracking-tight">
+            <Link href="/" className="block text-2xl font-bold tracking-tighter">
               BE-FIT
             </Link>
           </div>
 
           <div className="max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter lg:text-5xl">
               Welcome back to your fitness journey.
             </h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">
+            <p className="mt-6 text-base leading-7 text-[var(--foreground)]/[0.5]">
               Track your progress, compete with peers, and push your limits with AI-powered coaching.
             </p>
 
-            <div className="mt-12 space-y-6">
+            <div className="mt-12 space-y-8">
               {[
                 { value: "10,000+", label: "Active athletes" },
                 { value: "500,000+", label: "Workouts completed" },
                 { value: "98%", label: "Goal achievement rate" },
               ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl font-bold">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                <div key={stat.label} className="flex flex-col items-center">
+                  <div className="text-2xl font-bold tracking-tighter">{stat.value}</div>
+                  <div className="mt-1 text-sm text-[var(--foreground)]/[0.4]">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="text-xs text-gray-500">
+          <div className="mt-auto text-xs text-[var(--foreground)]/[0.4]">
             &copy; 2026 BE-FIT. All rights reserved.
           </div>
         </div>
