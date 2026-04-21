@@ -4,71 +4,7 @@ export default function ForgotPassword() {
   return (
     <main className="min-h-screen bg-white">
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row">
-        {/* Left side - Branding */}
-        <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
-          <div>
-            <Link href="/" className="text-2xl font-bold tracking-tight">
-              BE-FIT
-            </Link>
-          </div>
-
-          <div className="max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-              Forgot your password? No worries.
-            </h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">
-              We'll help you reset it and get you back to crushing your fitness goals in no time.
-            </p>
-
-            <div className="mt-12 space-y-6">
-              {[
-                {
-                  icon: (
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                  ),
-                  title: "Secure reset",
-                  desc: "Encrypted password reset links"
-                },
-                {
-                  icon: (
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  ),
-                  title: "Instant delivery",
-                  desc: "Reset email arrives in seconds"
-                },
-                {
-                  icon: (
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  ),
-                  title: "Protected",
-                  desc: "Links expire after 1 hour"
-                },
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gray-800 text-gray-300">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold">{item.title}</h3>
-                    <p className="mt-1 text-xs text-gray-400">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-xs text-gray-500">
-            &copy; 2026 BE-FIT. All rights reserved.
-          </div>
-        </div>
-
+      <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
           <div className="w-full max-w-md">
@@ -140,16 +76,13 @@ export default function ForgotPassword() {
                 <div className="text-sm text-gray-600">
                   <p className="font-medium text-gray-900">Having trouble?</p>
                   <p className="mt-1">
-                    If you don't receive an email within a few minutes, check your spam folder or{" "}
-                    <Link href="/about" className="font-medium text-gray-900 underline hover:text-gray-700">
-                      contact support
-                    </Link>
+                    If you don't receive an email within a few minutes, check your spam folder.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 rounded-lg border border-gray-200 p-6">
+            {/* <div className="mt-8 rounded-lg border border-gray-200 p-6">
               <h3 className="mb-3 text-sm font-semibold text-gray-900">What happens next?</h3>
               <ol className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-3">
@@ -171,7 +104,7 @@ export default function ForgotPassword() {
                   <span>Sign in with your new password and continue training</span>
                 </li>
               </ol>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

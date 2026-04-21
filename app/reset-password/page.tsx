@@ -4,61 +4,7 @@ export default function ResetPassword() {
   return (
     <main className="min-h-screen bg-white">
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row">
-        {/* Left side - Branding */}
-        <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
-          <div>
-            <Link href="/" className="text-2xl font-bold tracking-tight">
-              BE-FIT
-            </Link>
-          </div>
-
-          <div className="max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-              Create a strong password.
-            </h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">
-              A strong password keeps your fitness data, progress tracking, and personal information secure.
-            </p>
-
-            <div className="mt-12 space-y-4">
-              <div className="rounded-lg border border-gray-800 bg-gray-900/50 p-5">
-                <h3 className="mb-3 text-sm font-semibold">Password requirements:</h3>
-                <ul className="space-y-2 text-xs text-gray-400">
-                  <li className="flex items-center gap-2">
-                    <svg className="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    At least 8 characters long
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <svg className="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Contains at least one uppercase letter
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <svg className="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Contains at least one number
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <svg className="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Contains at least one special character
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-xs text-gray-500">
-            &copy; 2026 BE-FIT. All rights reserved.
-          </div>
-        </div>
-
+      <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
           <div className="w-full max-w-md">
@@ -174,20 +120,6 @@ export default function ResetPassword() {
                 </svg>
                 Back to login
               </Link>
-            </div>
-
-            <div className="mt-12 rounded-lg border border-gray-200 bg-yellow-50 p-5">
-              <div className="flex items-start gap-3">
-                <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <div className="text-sm text-yellow-800">
-                  <p className="font-semibold">Security tip</p>
-                  <p className="mt-1">
-                    Don't reuse passwords from other accounts. Use a unique password for BE-FIT to keep your fitness data secure.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

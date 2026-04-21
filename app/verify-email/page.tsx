@@ -4,45 +4,7 @@ export default function VerifyEmail() {
   return (
     <main className="min-h-screen bg-white">
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row">
-        {/* Left side - Branding */}
-        <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
-          <div>
-            <Link href="/" className="text-2xl font-bold tracking-tight">
-              BE-FIT
-            </Link>
-          </div>
-
-          <div className="max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-              Almost there! Let's secure your account.
-            </h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">
-              Email verification ensures your account is secure and gives you access to all BE-FIT features.
-            </p>
-
-            <div className="mt-12 rounded-lg border border-gray-800 bg-gray-900/50 p-6">
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gray-800">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold">Security First</h3>
-                  <p className="mt-1 text-xs text-gray-400">
-                    We use industry-standard encryption to protect your data and privacy.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-xs text-gray-500">
-            &copy; 2026 BE-FIT. All rights reserved.
-          </div>
-        </div>
-
+      <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
           <div className="w-full max-w-md">
@@ -101,37 +63,6 @@ export default function VerifyEmail() {
                 </p>
               </div>
             </div>
-
-            <div className="mt-12 rounded-lg border border-gray-200 p-6">
-              <h3 className="mb-4 text-sm font-semibold text-gray-900">What's next?</h3>
-              <ol className="space-y-3 text-sm text-gray-600">
-                <li className="flex items-start gap-3">
-                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
-                    1
-                  </span>
-                  <span>Click the verification link in your email</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
-                    2
-                  </span>
-                  <span>Complete your profile and set your fitness goals</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
-                    3
-                  </span>
-                  <span>Start your first AI-powered workout</span>
-                </li>
-              </ol>
-            </div>
-
-            <p className="mt-8 text-center text-xs text-gray-500">
-              Need help?{" "}
-              <Link href="/about" className="underline hover:text-gray-900">
-                Contact support
-              </Link>
-            </p>
           </div>
         </div>
       </div>

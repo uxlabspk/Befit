@@ -4,45 +4,7 @@ export default function Signup() {
   return (
     <main className="min-h-screen bg-white">
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row">
-        {/* Left side - Branding */}
-        <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
-          <div>
-            <Link href="/" className="text-2xl font-bold tracking-tight">
-              BE-FIT
-            </Link>
-          </div>
-
-          <div className="max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-              Start your transformation today.
-            </h1>
-            <p className="mt-6 text-base leading-7 text-gray-400">
-              Join thousands of athletes who've unlocked their potential with AI-powered coaching and community support.
-            </p>
-
-            <div className="mt-12 space-y-4">
-              {[
-                "Personalized workout plans that adapt to your progress",
-                "AI coaching available 24/7 for real-time guidance",
-                "Compete with peers on live leaderboards",
-                "Track nutrition, recovery, and performance metrics",
-              ].map((feature) => (
-                <div key={feature} className="flex items-start gap-3">
-                  <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-sm text-gray-300">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-xs text-gray-500">
-            &copy; 2026 BE-FIT. All rights reserved.
-          </div>
-        </div>
-
+      <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
           <div className="w-full max-w-md">
