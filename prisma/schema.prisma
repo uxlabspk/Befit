@@ -1,0 +1,587 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  COACH
+  BUSINESS
+}
+
+enum ProgramTrack {
+  GYM
+  LOCAL_HOME
+}
+
+enum MembershipTier {
+  FREE
+  PAID
+}
+
+enum EnrollmentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  ENDING_SOON
+  EXPIRED
+  OVERDUE
+  CANCELLED
+}
+
+enum NotificationType {
+  SUBSCRIPTION_ENDING
+  DAILY_WORKOUT_REMINDER
+  DAILY_POINTS_REMINDER
+  NEW_PRODUCT_INTRODUCTION
+  PROMOTED_PRODUCT
+  COUNSELLING_REMINDER
+  GENERAL
+}
+
+enum NotificationChannel {
+  PUSH
+  IN_APP
+  EMAIL
+  SMS
+}
+
+enum DeliveryStatus {
+  QUEUED
+  SENT
+  FAILED
+  READ
+}
+
+enum PointSourceType {
+  CALORIE_LOG
+  WATER_LOG
+  POST_UPLOAD
+  MANUAL_ADJUSTMENT
+  BONUS
+}
+
+enum CounsellingBookingStatus {
+  REQUESTED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum PromotionRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PostVisibility {
+  PUBLIC
+  FOLLOWERS
+}
+
+enum StoryType {
+  TEXT
+  IMAGE
+}
+
+enum GalleryTab {
+  MAIN_GALLERY
+  MEMBER_CHAMPION
+  LOCAL_HOME_CHAMPION
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id                    String                       @id @default(auto()) @map("_id") @db.ObjectId
+  email                 String                       @unique
+  passwordHash          String
+  fullName              String
+  role                  UserRole                     @default(USER)
+  phone                 String?
+  avatarUrl             String?
+  isActive              Boolean                      @default(false)
+  emailVerifiedAt       DateTime?
+  lastLoginAt           DateTime?
+  createdAt             DateTime                     @default(now())
+  updatedAt             DateTime                     @updatedAt
+
+  profile               UserProfile?
+  enrollments           ProgramEnrollment[]
+  subscriptions         MembershipSubscription[]
+  feeStatusHistory      FeeStatusHistory[]
+  pointsProgress        UserPointsProgress?
+  pointTransactions     PointTransaction[]
+  foodLogs              FoodLog[]
+  waterLogs             WaterLog[]
+  leaderboardEntries    LeaderboardEntry[]
+  galleryEntries        GalleryEntry[]
+  notifications         NotificationDelivery[]
+  counsellingWallet     CounsellingWallet?
+  counsellingRequests   CounsellingBooking[]         @relation("MemberBookings")
+  coachingBookings      CounsellingBooking[]         @relation("CoachBookings")
+  posts                 FeedPost[]
+  stories               StatusStory[]
+  postLikes             PostLike[]
+  following             UserFollow[]                 @relation("Follower")
+  followers             UserFollow[]                 @relation("Following")
+  promotionRequests     PromotionRequest[]           @relation("RequestedByUser")
+  promotionDeliveries   PromotionDelivery[]
+  paymentRecords        PaymentRecord[]
+  auditActions          AdminActionLog[]             @relation("AdminActor")
+  reviewedEnrollments   ProgramEnrollment[]          @relation("EnrollmentReviewedBy")
+  reviewedApprovals     ApprovalRequest[]            @relation("ApprovalReviewedBy")
+  reviewedPromotions    PromotionRequest[]           @relation("PromotionReviewedBy")
+  approvedCampaigns     PromotionCampaign[]          @relation("CampaignApprovedBy")
+  configuredSlots       CounsellingTimeSlot[]        @relation("SlotConfiguredBy")
+  introducedProducts    StoreProduct[]               @relation("ProductIntroducedBy")
+
+  @@index([role])
+  @@index([isActive])
+}
+
+model UserProfile {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @unique @db.ObjectId
+  address               String?
+  city                  String?
+  country               String?
+  profilePhotoUrl       String?
+  currentProgramTrack   ProgramTrack?
+  membershipTier        MembershipTier @default(FREE)
+
+  user                  User     @relation(fields: [userId], references: [id])
+}
+
+model ApprovalRequest {
+  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  requestedUserId       String?           @db.ObjectId
+  applicantName         String
+  applicantEmail        String
+  applicantAddress      String?
+  applicantPhotoUrl     String?
+  feeProofUrl           String?
+  status                EnrollmentStatus  @default(PENDING)
+  rejectionReason       String?
+  reviewedById          String?           @db.ObjectId
+  reviewedAt            DateTime?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  requestedUser         User?             @relation(fields: [requestedUserId], references: [id])
+  reviewedBy            User?             @relation("ApprovalReviewedBy", fields: [reviewedById], references: [id])
+
+  @@index([status])
+  @@index([applicantEmail])
+}
+
+model ProgramEnrollment {
+  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String            @db.ObjectId
+  track                 ProgramTrack
+  tier                  MembershipTier    @default(FREE)
+  status                EnrollmentStatus  @default(PENDING)
+  startsAt              DateTime?
+  endsAt                DateTime?
+  reviewedById          String?           @db.ObjectId
+  reviewedAt            DateTime?
+  rejectionReason       String?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  user                  User              @relation(fields: [userId], references: [id])
+  reviewedBy            User?             @relation("EnrollmentReviewedBy", fields: [reviewedById], references: [id])
+
+  @@index([userId, status])
+  @@index([track, tier])
+}
+
+model MembershipSubscription {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  status                SubscriptionStatus  @default(ACTIVE)
+  startsAt              DateTime
+  endsAt                DateTime
+  autoRenew             Boolean             @default(false)
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  user                  User                @relation(fields: [userId], references: [id])
+
+  @@index([userId, status])
+  @@index([endsAt])
+}
+
+model FeeStatusHistory {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  subscriptionStatus    SubscriptionStatus
+  note                  String?
+  changedAt             DateTime            @default(now())
+
+  user                  User                @relation(fields: [userId], references: [id])
+
+  @@index([userId, changedAt])
+}
+
+model LevelTier {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String   @unique
+  rankOrder             Int      @unique
+  minPoints             Int
+  maxPoints             Int?
+  unlockAnimalAvatar    Boolean  @default(false)
+
+  members               UserPointsProgress[]
+  leaderboardEntries    LeaderboardEntry[]
+
+  @@index([minPoints, maxPoints])
+}
+
+model UserPointsProgress {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @unique @db.ObjectId
+  totalPoints           Int      @default(0)
+  currentLevelId        String?  @db.ObjectId
+  lastAwardedAt         DateTime?
+  updatedAt             DateTime @updatedAt
+
+  user                  User     @relation(fields: [userId], references: [id])
+  currentLevel          LevelTier? @relation(fields: [currentLevelId], references: [id])
+}
+
+model PointTransaction {
+  id                    String          @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String          @db.ObjectId
+  sourceType            PointSourceType
+  sourceRefId           String?
+  points                Int
+  description           String?
+  createdAt             DateTime        @default(now())
+
+  user                  User            @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt])
+  @@index([sourceType, sourceRefId])
+}
+
+model FoodLog {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @db.ObjectId
+  foodName              String
+  calories              Int
+  servingNote           String?
+  aiAssisted            Boolean  @default(true)
+  pointsAwarded         Int      @default(0)
+  loggedAt              DateTime @default(now())
+
+  user                  User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, loggedAt])
+}
+
+model WaterLog {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @db.ObjectId
+  milliliters           Int
+  pointsAwarded         Int      @default(0)
+  loggedAt              DateTime @default(now())
+
+  user                  User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, loggedAt])
+}
+
+model LeaderboardEntry {
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String      @db.ObjectId
+  levelTierId           String?     @db.ObjectId
+  track                 ProgramTrack
+  periodYear            Int
+  periodMonth           Int
+  rank                  Int
+  totalPoints           Int
+  isChampionOfMonth     Boolean     @default(false)
+  createdAt             DateTime    @default(now())
+
+  user                  User        @relation(fields: [userId], references: [id])
+  levelTier             LevelTier?  @relation(fields: [levelTierId], references: [id])
+
+  @@unique([periodYear, periodMonth, track, userId])
+  @@unique([periodYear, periodMonth, track, rank])
+  @@index([track, periodYear, periodMonth])
+}
+
+model GalleryEntry {
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  tab                   GalleryTab
+  title                 String
+  imageUrl              String
+  memberId              String?     @db.ObjectId
+  periodYear            Int?
+  periodMonth           Int?
+  startsAt              DateTime
+  endsAt                DateTime
+  isArchived            Boolean     @default(false)
+  createdAt             DateTime    @default(now())
+
+  member                User?       @relation(fields: [memberId], references: [id])
+
+  @@index([tab, startsAt, endsAt])
+  @@index([memberId])
+}
+
+model Notification {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  type                  NotificationType
+  channel               NotificationChannel @default(PUSH)
+  title                 String
+  body                  String
+  payloadJson           String?
+  scheduledFor          DateTime?
+  createdAt             DateTime            @default(now())
+
+  deliveries            NotificationDelivery[]
+
+  @@index([type, scheduledFor])
+}
+
+model NotificationDelivery {
+  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
+  notificationId        String         @db.ObjectId
+  userId                String         @db.ObjectId
+  status                DeliveryStatus @default(QUEUED)
+  sentAt                DateTime?
+  readAt                DateTime?
+  failureReason         String?
+
+  notification          Notification   @relation(fields: [notificationId], references: [id])
+  user                  User           @relation(fields: [userId], references: [id])
+
+  @@unique([notificationId, userId])
+  @@index([userId, status])
+}
+
+model CounsellingWallet {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @unique @db.ObjectId
+  totalCallsPurchased   Int      @default(0)
+  totalCallsUsed        Int      @default(0)
+  updatedAt             DateTime @updatedAt
+
+  user                  User     @relation(fields: [userId], references: [id])
+}
+
+model CounsellingTimeSlot {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  startsAt              DateTime
+  endsAt                DateTime
+  isActive              Boolean  @default(true)
+  configuredById        String?  @db.ObjectId
+  createdAt             DateTime @default(now())
+
+  configuredBy          User?    @relation("SlotConfiguredBy", fields: [configuredById], references: [id])
+  bookings              CounsellingBooking[]
+
+  @@index([startsAt, endsAt])
+}
+
+model CounsellingBooking {
+  id                    String                   @id @default(auto()) @map("_id") @db.ObjectId
+  memberId              String                   @db.ObjectId
+  slotId                String                   @db.ObjectId
+  coachId               String?                  @db.ObjectId
+  status                CounsellingBookingStatus @default(REQUESTED)
+  reminderSentAt        DateTime?
+  notes                 String?
+  createdAt             DateTime                 @default(now())
+
+  member                User                     @relation("MemberBookings", fields: [memberId], references: [id])
+  slot                  CounsellingTimeSlot      @relation(fields: [slotId], references: [id])
+  coach                 User?                    @relation("CoachBookings", fields: [coachId], references: [id])
+
+  @@index([memberId, status])
+  @@index([slotId])
+}
+
+model FeedPost {
+  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
+  authorId              String         @db.ObjectId
+  caption               String?
+  mediaUrl              String?
+  visibility            PostVisibility @default(PUBLIC)
+  createdAt             DateTime       @default(now())
+
+  author                User           @relation(fields: [authorId], references: [id])
+  likes                 PostLike[]
+
+  @@index([authorId, createdAt])
+}
+
+model StatusStory {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  authorId              String    @db.ObjectId
+  type                  StoryType
+  textContent           String?
+  mediaUrl              String?
+  createdAt             DateTime  @default(now())
+  expiresAt             DateTime
+
+  author                User      @relation(fields: [authorId], references: [id])
+
+  @@index([authorId, expiresAt])
+}
+
+model PostLike {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  postId                String   @db.ObjectId
+  userId                String   @db.ObjectId
+  createdAt             DateTime @default(now())
+
+  post                  FeedPost @relation(fields: [postId], references: [id])
+  user                  User     @relation(fields: [userId], references: [id])
+
+  @@unique([postId, userId])
+  @@index([userId, createdAt])
+}
+
+model UserFollow {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  followerId            String   @db.ObjectId
+  followingId           String   @db.ObjectId
+  createdAt             DateTime @default(now())
+
+  follower              User     @relation("Follower", fields: [followerId], references: [id])
+  following             User     @relation("Following", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+  @@index([followingId])
+}
+
+model BusinessPartner {
+  id                    String             @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String
+  contactEmail          String?
+  contactPhone          String?
+  websiteUrl            String?
+  createdAt             DateTime           @default(now())
+
+  promotionRequests     PromotionRequest[]
+}
+
+model PromotionRequest {
+  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
+  partnerId             String?                @db.ObjectId
+  requestedByUserId     String?                @db.ObjectId
+  productName           String
+  productImageUrl       String
+  productDescription    String
+  status                PromotionRequestStatus @default(PENDING)
+  reviewedById          String?                @db.ObjectId
+  reviewedAt            DateTime?
+  rejectionReason       String?
+  createdAt             DateTime               @default(now())
+
+  partner               BusinessPartner?       @relation(fields: [partnerId], references: [id])
+  requestedBy           User?                  @relation("RequestedByUser", fields: [requestedByUserId], references: [id])
+  reviewedBy            User?                  @relation("PromotionReviewedBy", fields: [reviewedById], references: [id])
+  campaign              PromotionCampaign?
+
+  @@index([status, createdAt])
+}
+
+model PromotionCampaign {
+  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
+  requestId             String                 @unique @db.ObjectId
+  approvedById          String?                @db.ObjectId
+  title                 String
+  description           String
+  imageUrl              String
+  startsAt              DateTime
+  endsAt                DateTime?
+  createdAt             DateTime               @default(now())
+
+  request               PromotionRequest       @relation(fields: [requestId], references: [id])
+  approvedBy            User?                  @relation("CampaignApprovedBy", fields: [approvedById], references: [id])
+  deliveries            PromotionDelivery[]
+  promotedProducts      StoreProduct[]
+
+  @@index([startsAt, endsAt])
+}
+
+model PromotionDelivery {
+  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
+  campaignId            String         @db.ObjectId
+  userId                String         @db.ObjectId
+  status                DeliveryStatus @default(QUEUED)
+  sentAt                DateTime?
+  clickedAt             DateTime?
+
+  campaign              PromotionCampaign @relation(fields: [campaignId], references: [id])
+  user                  User              @relation(fields: [userId], references: [id])
+
+  @@unique([campaignId, userId])
+  @@index([userId, status])
+}
+
+model StoreProduct {
+  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String
+  description           String
+  imageUrl              String?
+  pricePkr              Int?
+  isActive              Boolean           @default(true)
+  introducedById        String?           @db.ObjectId
+  promotionCampaignId   String?           @db.ObjectId
+  createdAt             DateTime          @default(now())
+
+  introducedBy          User?             @relation("ProductIntroducedBy", fields: [introducedById], references: [id])
+  promotionCampaign     PromotionCampaign? @relation(fields: [promotionCampaignId], references: [id])
+
+  @@index([isActive, createdAt])
+}
+
+model PaymentRecord {
+  id                    String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String        @db.ObjectId
+  stripeEventId         String?       @unique
+  stripePaymentIntentId String?       @unique
+  amountPkr             Int
+  status                PaymentStatus @default(PENDING)
+  createdAt             DateTime      @default(now())
+
+  user                  User          @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt])
+}
+
+model AdminActionLog {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  adminId               String   @db.ObjectId
+  action                String
+  targetType            String
+  targetId              String?
+  details               String?
+  createdAt             DateTime @default(now())
+
+  admin                 User     @relation("AdminActor", fields: [adminId], references: [id])
+
+  @@index([adminId, createdAt])
+  @@index([targetType, targetId])
+}
