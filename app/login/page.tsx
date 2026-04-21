@@ -1,14 +1,10 @@
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 export default function Login() {
   return (
     <main className="min-h-screen bg-[var(--background)]">
-      <Navigation />
-      
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row pt-16">
+      <div className="flex min-h-screen flex-col lg:flex-row">
         {/* Left side - Branding */}
         <div className="hidden flex-col justify-between bg-[var(--foreground)]/[0.05] p-12 text-[var(--foreground)] lg:flex lg:w-1/2">
           <div>
@@ -186,8 +182,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </main>
   );
 }

@@ -1,14 +1,10 @@
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 export default function VerifyEmail() {
   return (
     <main className="min-h-screen bg-white">
-      <Navigation />
-      
       {/* Full-screen auth container */}
-      <div className="flex min-h-screen flex-col lg:flex-row pt-16">
+      <div className="flex min-h-screen flex-col lg:flex-row">
         {/* Left side - Branding */}
         <div className="hidden flex-col justify-between bg-gray-950 p-12 text-white lg:flex lg:w-1/2">
           <div>
@@ -139,8 +135,6 @@ export default function VerifyEmail() {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </main>
   );
 }
