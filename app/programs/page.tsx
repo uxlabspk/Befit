@@ -49,20 +49,20 @@ const programs = [
 
 export default function Programs() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-screen animate-fade-in bg-[var(--background)] text-[var(--foreground)]">
       <Navigation />
 
       {/* Hero Section */}
       <section className="border-b border-[var(--border)] pt-24">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
+            <div className="animate-fade-up text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Training programs
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 animate-fade-up text-4xl font-bold leading-none tracking-tighter stagger-1 sm:text-5xl lg:text-6xl">
               Choose your training path.
             </h1>
-            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
+            <p className="mt-6 animate-fade-up text-lg text-[var(--foreground)]/[0.5] stagger-2">
               Three evidence-based approaches designed to fit your lifestyle, equipment access, and goals. Every program adapts to your progress.
             </p>
           </div>
@@ -76,9 +76,9 @@ export default function Programs() {
             {programs.map(({ name, code, description, details, fullDescription, idealFor, equipment }, index) => (
               <article
                 key={code}
-                className={`grid gap-14 lg:grid-cols-2 lg:gap-20 ${
-                  index % 2 === 1 ? "lg:direction-rtl" : ""
-                }`}
+                className={`grid animate-fade-up gap-14 lg:grid-cols-2 lg:gap-20 ${index % 2 === 1 ? "lg:direction-rtl" : ""
+                  }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="mb-5 text-xs font-mono text-[var(--foreground)]/[0.3]">{code}</div>
@@ -132,7 +132,7 @@ export default function Programs() {
         buttons={[
           { label: "Take the assessment", href: "/signup" },
         ]}
-        
+
       />
 
       <Footer />

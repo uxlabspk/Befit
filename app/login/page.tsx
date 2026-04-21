@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <main className="min-h-screen bg-[var(--background)]">
+    <main className="min-h-screen animate-fade-in bg-[var(--background)]">
       {/* Full-screen auth container */}
       <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-md animate-fade-up">
             {/* Mobile logo */}
             <div className="mb-8 lg:hidden">
               <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
@@ -15,7 +15,7 @@ export default function Login() {
               </Link>
             </div>
 
-            <div className="mb-8">
+            <div className="mb-8 animate-fade-up stagger-1">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">Sign in</h2>
               <p className="mt-2 text-sm text-gray-600">
                 Don't have an account?{" "}
@@ -25,7 +25,7 @@ export default function Login() {
               </p>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-6 animate-fade-up stagger-2">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -87,7 +87,7 @@ export default function Login() {
               </div>
             </form>
 
-            <div className="mt-8">
+            <div className="mt-8 animate-fade-up stagger-3">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-200" />

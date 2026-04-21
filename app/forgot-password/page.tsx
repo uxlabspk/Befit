@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function ForgotPassword() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen animate-fade-in bg-white">
       {/* Full-screen auth container */}
       <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-md animate-fade-up">
             {/* Mobile logo */}
             <div className="mb-8 lg:hidden">
               <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
             </div>
 
             {/* Icon */}
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex animate-fade-up justify-center stagger-1">
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100">
                 <svg className="h-10 w-10 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
@@ -24,14 +24,14 @@ export default function ForgotPassword() {
               </div>
             </div>
 
-            <div className="mb-8 text-center">
+            <div className="mb-8 animate-fade-up text-center stagger-2">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">Reset password</h2>
               <p className="mt-3 text-sm text-gray-600">
                 Enter your email address and we'll send you a link to reset your password.
               </p>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-6 animate-fade-up stagger-3">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -68,7 +68,7 @@ export default function ForgotPassword() {
               </Link>
             </div>
 
-            <div className="mt-12 rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <div className="mt-12 animate-fade-up rounded-lg border border-gray-200 bg-gray-50 p-6 stagger-4">
               <div className="flex items-start gap-3">
                 <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

@@ -97,20 +97,20 @@ const features = [
 
 export default function Features() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-screen animate-fade-in bg-[var(--background)] text-[var(--foreground)]">
       <Navigation />
 
       {/* Hero Section */}
       <section className="border-b border-[var(--border)] pt-24">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
+            <div className="animate-fade-up text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Features
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 animate-fade-up text-4xl font-bold leading-none tracking-tighter stagger-1 sm:text-5xl lg:text-6xl">
               Everything you need to train smarter.
             </h1>
-            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
+            <p className="mt-6 animate-fade-up text-lg text-[var(--foreground)]/[0.5] stagger-2">
               Built on a foundation of sports science and behavioral psychology. Every feature is designed to keep you consistent, motivated, and progressing.
             </p>
           </div>
@@ -124,9 +124,9 @@ export default function Features() {
             {features.map(({ title, text, icon, details }, index) => (
               <div
                 key={title}
-                className={`grid gap-14 lg:grid-cols-2 lg:gap-20 ${
-                  index % 2 === 1 ? "lg:direction-rtl" : ""
-                }`}
+                className={`grid animate-fade-up gap-14 lg:grid-cols-2 lg:gap-20 ${index % 2 === 1 ? "lg:direction-rtl" : ""
+                  }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="mb-8 text-[var(--foreground)]">{icon}</div>
@@ -189,11 +189,10 @@ export default function Features() {
                         ].map((user) => (
                           <div
                             key={user.rank}
-                            className={`rounded-lg border p-5 ${
-                              user.highlighted 
-                                ? "border-[var(--foreground)] bg-[var(--muted)] text-[var(--foreground)]" 
+                            className={`rounded-lg border p-5 ${user.highlighted
+                                ? "border-[var(--foreground)] bg-[var(--muted)] text-[var(--foreground)]"
                                 : "border-[var(--border)] bg-white text-[var(--foreground)]/[0.8]"
-                            }`}
+                              }`}
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3">
@@ -270,7 +269,7 @@ export default function Features() {
         subtitle="Start your free trial today and unlock the full power of intelligent fitness tracking."
         buttons={[
           { label: "Start free trial", href: "/signup" },
-        ]}        
+        ]}
       />
 
       <Footer />

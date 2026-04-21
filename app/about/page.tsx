@@ -61,20 +61,20 @@ const milestones = [
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-screen animate-fade-in bg-[var(--background)] text-[var(--foreground)]">
       <Navigation />
 
       {/* Hero Section */}
       <section className="border-b border-[var(--border)] pt-24">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
+            <div className="animate-fade-up text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               About us
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 animate-fade-up text-4xl font-bold leading-none tracking-tighter stagger-1 sm:text-5xl lg:text-6xl">
               Building the future of intelligent fitness.
             </h1>
-            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
+            <p className="mt-6 animate-fade-up text-lg text-[var(--foreground)]/[0.5] stagger-2">
               We're on a mission to make world-class fitness coaching accessible to everyone, powered by science, technology, and community.
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function About() {
       {/* Our Story */}
       <section>
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-3xl animate-fade-up">
             <h2 className="mb-10 text-3xl font-bold tracking-tighter">Our story</h2>
             <div className="space-y-8 text-base leading-7 text-[var(--foreground)]/[0.6]">
               <p>
@@ -107,8 +107,12 @@ export default function About() {
           <h2 className="mb-16 text-center text-3xl font-bold tracking-tighter">Our journey</h2>
           <div className="mx-auto max-w-3xl">
             <div className="space-y-10">
-              {milestones.map(({ year, event }) => (
-                <div key={year} className="flex gap-8">
+              {milestones.map(({ year, event }, index) => (
+                <div
+                  key={year}
+                  className="flex animate-fade-up gap-8"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <div className="flex-shrink-0">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--foreground)] text-sm font-bold text-white">
                       {year}
@@ -135,10 +139,11 @@ export default function About() {
           </div>
 
           <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {values.map(({ title, description }) => (
+            {values.map(({ title, description }, index) => (
               <div
                 key={title}
-                className="rounded-lg border border-[var(--border)] bg-white p-10 transition-all duration-350 hover:-translate-y-0.5 hover:shadow-md"
+                className="animate-fade-up rounded-lg border border-[var(--border)] bg-white p-10 transition-all duration-350 hover:-translate-y-0.5 hover:shadow-md"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
                 <h3 className="mb-4 text-xl font-bold tracking-tighter">{title}</h3>
                 <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{description}</p>
@@ -159,8 +164,8 @@ export default function About() {
           </div>
 
           <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map(({ name, role, bio }) => (
-              <div key={name} className="text-center">
+            {teamMembers.map(({ name, role, bio }, index) => (
+              <div key={name} className="animate-fade-up text-center" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="mx-auto mb-6 grid h-36 w-36 place-items-center rounded-full border-[1px] border-[var(--border)] bg-[var(--background)] shadow-sm transition-all duration-300 hover:border-[var(--foreground)]/[0.2] hover:shadow-sm">
                   <span className="text-2xl font-bold text-[var(--foreground)]/[0.6]">{name.charAt(0)}</span>
                 </div>

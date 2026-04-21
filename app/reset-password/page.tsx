@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function ResetPassword() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen animate-fade-in bg-white">
       {/* Full-screen auth container */}
       <div className="flex min-h-screen items-center justify-center">
         {/* Right side - Form */}
         <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2 lg:px-12">
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-md animate-fade-up">
             {/* Mobile logo */}
             <div className="mb-8 lg:hidden">
               <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
@@ -16,7 +16,7 @@ export default function ResetPassword() {
             </div>
 
             {/* Icon */}
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex animate-fade-up justify-center stagger-1">
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100">
                 <svg className="h-10 w-10 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -24,14 +24,14 @@ export default function ResetPassword() {
               </div>
             </div>
 
-            <div className="mb-8 text-center">
+            <div className="mb-8 animate-fade-up text-center stagger-2">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">New password</h2>
               <p className="mt-3 text-sm text-gray-600">
                 Create a new strong password for your account
               </p>
             </div>
 
-            <form className="space-y-5">
+            <form className="space-y-5 animate-fade-up stagger-3">
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   New password

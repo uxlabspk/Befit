@@ -79,20 +79,20 @@ const faqs = [
 
 export default function Pricing() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-screen animate-fade-in bg-[var(--background)] text-[var(--foreground)]">
       <Navigation />
 
       {/* Hero Section */}
       <section className="border-b border-[var(--border)] pt-24">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
+            <div className="animate-fade-up text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
               Pricing
             </div>
-            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tighter sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 animate-fade-up text-4xl font-bold leading-none tracking-tighter stagger-1 sm:text-5xl lg:text-6xl">
               Select your plan.
             </h1>
-            <p className="mt-6 text-lg text-[var(--foreground)]/[0.5]">
+            <p className="mt-6 animate-fade-up text-lg text-[var(--foreground)]/[0.5] stagger-2">
               Transparent pricing. No hidden fees. Cancel anytime. Start with a 14-day free trial.
             </p>
           </div>
@@ -105,7 +105,7 @@ export default function Pricing() {
       {/* Comparison Table */}
       <section className="border-t border-[var(--border)] bg-[var(--muted)]">
         <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
-          <div className="mx-auto max-w-4xl">
+          <div className="mx-auto max-w-4xl animate-fade-up">
             <h2 className="mb-16 text-center text-3xl font-bold tracking-tighter">
               Compare plans in detail
             </h2>
@@ -154,8 +154,12 @@ export default function Pricing() {
               Frequently asked questions
             </h2>
             <div className="space-y-8">
-              {faqs.map(({ question, answer }) => (
-                <div key={question} className="rounded-lg border border-[var(--border)] bg-white p-8">
+              {faqs.map(({ question, answer }, index) => (
+                <div
+                  key={question}
+                  className="animate-fade-up rounded-lg border border-[var(--border)] bg-white p-8"
+                  style={{ animationDelay: `${index * 0.08}s` }}
+                >
                   <h3 className="mb-3 text-lg font-semibold text-[var(--foreground)]">{question}</h3>
                   <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{answer}</p>
                 </div>
