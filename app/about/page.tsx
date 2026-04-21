@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { StatsBar, CTASection } from "@/components/sections";
 
 const teamMembers = [
   {
@@ -173,49 +174,24 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section>
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="grid gap-10 rounded-lg border border-[var(--border)] bg-[var(--muted)] p-14 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { value: "10,000+", label: "Active members" },
-              { value: "500,000+", label: "Workouts completed" },
-              { value: "98%", label: "Satisfaction rate" },
-              { value: "24/7", label: "AI coaching available" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="block text-4xl font-bold tracking-tighter">{stat.value}</div>
-                <div className="mt-3 block text-sm text-[var(--foreground)]/[0.6]">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsBar
+        stats={[
+          { value: "10,000+", label: "Active members" },
+          { value: "500,000+", label: "Workouts completed" },
+          { value: "98%", label: "Satisfaction rate" },
+          { value: "24/7", label: "AI coaching available" },
+        ]}
+        muted={false}
+      />
 
       {/* CTA Section */}
-      <section className="border-t border-[var(--border)] bg-[var(--foreground)] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Join the BE-FIT movement
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/[0.8]">
-            Be part of a community that's redefining what's possible through intelligent training and unwavering consistency.
-          </p>
-          <div className="mt-12 flex items-center justify-center gap-6">
-            <a
-              href="/signup"
-              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.9] hover:shadow-md"
-            >
-              Get started today
-            </a>
-            <a
-              href="/programs"
-              className="border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
-            >
-              Explore programs
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="Join the BE-FIT movement"
+        subtitle="Be part of a community that's redefining what's possible through intelligent training and unwavering consistency."
+        buttons={[
+          { label: "Get started today", href: "/signup" },
+        ]}
+      />
 
       <Footer />
     </main>

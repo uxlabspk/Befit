@@ -1,5 +1,15 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import {
+  StatsBar,
+  HowItWorks,
+  FeaturesGrid,
+  ProgramCards,
+  Champions,
+  Testimonials,
+  PricingCards,
+  CTASection,
+} from "@/components/sections";
 
 const steps = [
   {
@@ -172,8 +182,6 @@ const pricingPlans = [
   },
 ];
 
-const navLinks = ["Programs", "Features", "Pricing", "About"];
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-[var(--foreground)]">
@@ -263,252 +271,40 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section className="border-b border-[var(--border)] bg-[var(--muted)]">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-16 lg:grid-cols-4 lg:px-8">
-          {[
-            { value: "500+", label: "Active members" },
-            { value: "24/7", label: "AI coaching" },
-            { value: "3", label: "Training paths" },
-            { value: "98%", label: "Goal adherence" },
-          ].map((stat, i) => (
-            <div key={stat.label} className={`animate-fade-up stagger-${i + 1}`}>
-              <div className="block text-3xl font-bold tracking-tighter">{stat.value}</div>
-              <div className="mt-2 block text-sm text-[var(--foreground)]/[0.6]">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StatsBar
+        stats={[
+          { value: "500+", label: "Active members" },
+          { value: "24/7", label: "AI coaching" },
+          { value: "3", label: "Training paths" },
+          { value: "98%", label: "Goal adherence" },
+        ]}
+      />
 
       {/* How It Works */}
-      <section id="programs" className="border-b border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mb-20">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              How it works
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              Three steps to consistent progress.
-            </h2>
-          </div>
-
-          <div className="grid gap-16 md:grid-cols-3">
-            {steps.map(({ number, title, text }, i) => (
-              <div 
-                key={number} 
-                className={`animate-fade-up border-t-2 border-[var(--foreground)] pt-6 stagger-${i + 1} transition-transform duration-300 hover:-translate-y-0.5`}
-              >
-                <div className="mb-5 text-xs font-mono font-semibold text-[var(--foreground)]/[0.4]">{number}</div>
-                <h3 className="mb-3 text-xl font-bold tracking-tighter">{title}</h3>
-                <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HowItWorks steps={steps} />
 
       {/* Features Grid */}
-      <section id="features" className="border-b border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              Features
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              Everything you need to train smarter.
-            </h2>
-            <p className="mt-4 text-base text-[var(--foreground)]/[0.5]">
-              Built on a foundation of sports science and behavioral psychology.
-            </p>
-          </div>
-
-          <div className="mt-20 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(({ title, text }, i) => (
-              <div 
-                key={title} 
-                className={`animate-fade-up border-t border-[var(--border)] pt-8 stagger-${i + 1} transition-transform duration-300 hover:-translate-y-0.5`}
-              >
-                <h3 className="mb-4 text-lg font-bold tracking-tighter">{title}</h3>
-                <p className="text-base leading-7 text-[var(--foreground)]/[0.6]">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeaturesGrid features={features} />
 
       {/* Training Programs */}
-      <section className="border-b border-[var(--border)] bg-[var(--muted)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mb-20">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              Training programs
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              Choose your training path.
-            </h2>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-3">
-            {programs.map(({ name, code, description, details }, i) => (
-              <article
-                key={code}
-                className={`animate-fade-up stagger-${i + 1} flex flex-col rounded-lg border border-[var(--border)] bg-white p-10 transition-all duration-350 hover:-translate-y-0.5 hover:border-[var(--foreground)]/[0.1] hover:shadow-md`}
-              >
-                <div className="mb-3 text-xs font-mono text-[var(--foreground)]/[0.3]">{code}</div>
-                <h3 className="mb-4 text-xl font-bold tracking-tighter">{name}</h3>
-                <p className="mb-10 text-base leading-7 text-[var(--foreground)]/[0.6]">{description}</p>
-                <ul className="mb-10 space-y-4 text-sm text-[var(--foreground)]/[0.5]">
-                  {details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3">
-                      <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#pricing"
-                  className="w-full mt-auto inline-flex items-center justify-center rounded-md border border-[var(--foreground)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-colors duration-200 hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]/[0.9]"
-                >
-                  View details
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProgramCards programs={programs} />
 
       {/* Champions */}
-      <section className="border-b border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              Hall of champions
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              Real members. Real results.
-            </h2>
-          </div>
-
-          <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {champions.map(({ name, level, tag }, i) => (
-              <article 
-                key={name} 
-                className={`animate-fade-up stagger-${i + 1} text-center transition-transform duration-350 hover:-translate-y-0.5`}
-              >
-                <div className="mx-auto mb-6 grid h-36 w-36 place-items-center rounded-full border-[1px] border-[var(--border)] bg-[var(--muted)] transition-all duration-300 hover:border-[var(--foreground)]/[0.2] hover:shadow-sm">
-                  <span className="text-2xl font-bold text-[var(--foreground)]/[0.6]">{name.charAt(0)}</span>
-                </div>
-                <div className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]/[0.4]">
-                  {tag}
-                </div>
-                <h3 className="text-lg font-bold tracking-tighter">{name}</h3>
-                <p className="mt-1.5 text-sm text-[var(--foreground)]/[0.5]">{level}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Champions champions={champions} />
 
       {/* Testimonials */}
-      <section className="border-b border-[var(--border)] bg-[var(--muted)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mb-20">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              Testimonials
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              What members say.
-            </h2>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {testimonials.map(({ quote, author, role }, i) => (
-              <blockquote
-                key={author}
-                className={`animate-fade-up stagger-${i + 1} rounded-lg border border-[var(--border)] bg-white p-10 transition-all duration-350 hover:-translate-y-0.5 hover:shadow-md`}
-              >
-                <p className="mt-2 text-base leading-7 text-[var(--foreground)]/[0.7]">&ldquo;{quote}&rdquo;</p>
-                <footer className="mt-8 border-t border-[var(--border)] pt-6">
-                  <div className="text-sm font-semibold">{author}</div>
-                  <div className="mt-1 text-xs text-[var(--foreground)]/[0.5]">{role}</div>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Testimonials testimonials={testimonials} />
 
       {/* Pricing */}
-      <section id="pricing" className="border-b border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/[0.4]">
-              Pricing
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tighter sm:text-4xl">
-              Select your plan.
-            </h2>
-            <p className="mt-4 text-base text-[var(--foreground)]/[0.5]">
-              Transparent pricing. No hidden fees. Cancel anytime.
-            </p>
-          </div>
-
-          <div className="mt-20 grid gap-8 lg:grid-cols-3">
-            {pricingPlans.map(({ name, price, period, description, features: planFeatures, cta, highlighted }, i) => (
-              <article
-                key={name}
-                className={`animate-fade-up stagger-${i + 1} rounded-lg border border-[var(--border)] p-10 transition-all duration-350 hover:-translate-y-0.5 ${
-                  highlighted
-                    ? "border-[var(--foreground)] bg-[var(--muted)] shadow-sm"
-                    : "bg-white hover:border-[var(--foreground)]/[0.1] hover:shadow-md"
-                }`}
-              >
-                <h3 className="text-lg font-semibold tracking-tighter text-[var(--foreground)]">{name}</h3>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-3xl font-bold tracking-tighter text-[var(--foreground)]">{price}</span>
-                  <span className="mt-0.5 text-sm text-[var(--foreground)]/[0.5]">{period}</span>
-                </div>
-                <p className="mt-4 text-base text-[var(--foreground)]/[0.6]">{description}</p>
-                <ul className="mt-10 space-y-4 text-sm text-[var(--foreground)]/[0.5]">
-                  {planFeatures.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#contact"
-                  className={`mt-10 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 border border-[var(--foreground)]/[0.2] text-[var(--foreground)]/[0.8] hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]`}
-                >
-                  {cta}
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PricingCards plans={pricingPlans} />
 
       {/* CTA Section */}
-      <section className="border-b border-[var(--border)] bg-[var(--foreground)] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
-          <div className="mx-auto max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl">
-              Start building discipline today.
-            </h2>
-            <p className="mx-auto mt-8 max-w-xl text-base text-white/[0.8]">
-              Join hundreds of athletes who turned consistency into their competitive advantage.
-            </p>
-            <div className="mt-12 flex items-center justify-center gap-6">
-              <a
-                href="/pricing"
-                className="w-64 border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
-              >
-                Get started
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="Start building discipline today."
+        subtitle="Join hundreds of athletes who turned consistency into their competitive advantage."
+        buttons={[{ label: "Get started", href: "/pricing" }]}
+        variant="dark"
+      />
 
       {/* Footer */}
       <Footer />

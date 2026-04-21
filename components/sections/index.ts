@@ -1,0 +1,9 @@
+export { default as SectionHeader } from "./SectionHeader";
+export { default as StatsBar } from "./StatsBar";
+export { default as HowItWorks } from "./HowItWorks";
+export { default as FeaturesGrid } from "./FeaturesGrid";
+export { default as ProgramCards } from "./ProgramCards";
+export { default as Champions } from "./Champions";
+export { default as Testimonials } from "./Testimonials";
+export { default as PricingCards } from "./PricingCards";
+export { default as CTASection } from "./CTASection";

@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { CTASection } from "@/components/sections";
 
 const programs = [
   {
@@ -125,30 +126,14 @@ export default function Programs() {
       </section>
 
       {/* Comparison CTA */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Not sure which program is right for you?
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-500">
-            Take our 2-minute assessment to get a personalized recommendation based on your goals, experience, and available equipment.
-          </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <a
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-md bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
-            >
-              Take the assessment
-            </a>
-            <a
-              href="/features"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-600 transition hover:text-gray-900"
-            >
-              Learn more about features &rarr;
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="Not sure which program is right for you?"
+        subtitle="Take our 2-minute assessment to get a personalized recommendation based on your goals, experience, and available equipment."
+        buttons={[
+          { label: "Take the assessment", href: "/signup" },
+        ]}
+        
+      />
 
       <Footer />
     </main>

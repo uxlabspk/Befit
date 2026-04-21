@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { CTASection } from "@/components/sections";
 
 const features = [
   {
@@ -145,7 +146,7 @@ export default function Features() {
                   <div className="w-full max-w-md rounded-lg border border-[var(--border)] bg-[var(--background)] p-10">
                     <div className="mb-8 flex items-center justify-between text-xs font-medium uppercase tracking-wider text-[var(--foreground)]/[0.4]">
                       <span>{title} preview</span>
-                      <span className="rounded-full border border-[var(--border)] bg-[var(--foreground)] px-2.5 py-0.5 text-[0.65rem]">
+                      <span className="rounded-full text-white font-bold border border-[var(--border)] bg-[var(--foreground)] px-2.5 py-0.5 text-[0.65rem]">
                         Active
                       </span>
                     </div>
@@ -264,30 +265,13 @@ export default function Features() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-[var(--border)] bg-[var(--muted)]">
-        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Ready to experience all these features?
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-[var(--foreground)]/[0.5]">
-            Start your free trial today and unlock the full power of intelligent fitness tracking.
-          </p>
-          <div className="mt-12 flex items-center justify-center gap-6">
-            <a
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-md bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--foreground)]/[0.9]"
-            >
-              Start free trial
-            </a>
-            <a
-              href="/pricing"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-[var(--foreground)]/[0.6] transition hover:text-[var(--foreground)]"
-            >
-              View pricing &rarr;
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="Ready to experience all these features?"
+        subtitle="Start your free trial today and unlock the full power of intelligent fitness tracking."
+        buttons={[
+          { label: "Start free trial", href: "/signup" },
+        ]}        
+      />
 
       <Footer />
     </main>

@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { CTASection, PricingCards } from "@/components/sections";
 
 const pricingPlans = [
   {
@@ -99,55 +100,7 @@ export default function Pricing() {
       </section>
 
       {/* Pricing Cards */}
-      <section>
-        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-3">
-            {pricingPlans.map(({ name, price, period, description, features: planFeatures, cta, highlighted, bestFor }) => (
-              <article
-                key={name}
-                className={`rounded-lg border border-[var(--border)] p-10 transition-all duration-350 hover:-translate-y-0.5 ${
-                  highlighted
-                    ? "border-[var(--foreground)] bg-[var(--muted)] shadow-md"
-                    : "bg-white hover:border-[var(--foreground)]/[0.1] hover:shadow-md"
-                }`}
-              >
-                {highlighted && (
-                  <div className="mb-5 inline-flex items-center rounded-[var(--foreground)] px-4 py-1.5 text-[0.65rem] font-semibold uppercase tracking-wider text-white">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-xl font-semibold tracking-tighter text-[var(--foreground)]">{name}</h3>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-4xl font-bold tracking-tighter text-[var(--foreground)]">{price}</span>
-                  <span className="mt-0.5 text-sm text-[var(--foreground)]/[0.5]">{period}</span>
-                </div>
-                <p className="mt-5 text-base text-[var(--foreground)]/[0.6]">{description}</p>
-                <p className="mt-3 text-xs font-medium text-[var(--foreground)]/[0.5]">{bestFor}</p>
-                 
-                <ul className="mt-10 space-y-5 text-sm text-[var(--foreground)]/[0.5]">
-                  {planFeatures.map((feature) => (
-                    <li key={feature} className="flex items-start gap-4">
-                      <span className="mt-0.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[var(--foreground)]" />
-                      <span className="text-sm text-[var(--foreground)]/[0.6]">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                 
-                <a
-                  href="/signup"
-                  className={`mt-12 inline-flex w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200 ${
-                    highlighted
-                      ? "bg-[var(--foreground)] text-white hover:bg-[var(--foreground)]/[0.9]"
-                      : "border border-[var(--foreground)]/[0.2] text-[var(--foreground)]/[0.8] hover:bg-[var(--foreground)]/[0.05] hover:text-[var(--foreground)]"
-                  }`}
-                >
-                  {cta}
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PricingCards plans={pricingPlans} />
 
       {/* Comparison Table */}
       <section className="border-t border-[var(--border)] bg-[var(--muted)]">
@@ -213,30 +166,13 @@ export default function Pricing() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-[var(--border)] bg-[var(--foreground)] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-28 text-center lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Still have questions?
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/[0.8]">
-            Our team is here to help you choose the perfect plan for your fitness goals.
-          </p>
-          <div className="mt-12 flex items-center justify-center gap-6">
-            <a
-              href="/signup"
-              className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.9] hover:shadow-md"
-            >
-              Start free trial
-            </a>
-            <a
-              href="/about"
-              className="border border-white/[0.3] rounded-md px-6 py-3 text-sm font-medium text-white/[0.7] transition hover:text-white hover:border-white/[0.5]"
-            >
-              Contact us
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="Still have questions?"
+        subtitle="Our team is here to help you choose the perfect plan for your fitness goals."
+        buttons={[
+          { label: "Start free trial", href: "/signup" },
+        ]}
+      />
 
       <Footer />
     </main>
