@@ -1,6 +1,52 @@
+"use client";
+
 import Link from "next/link";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
+  const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const fullName = `${firstName} ${lastName}`.trim();
+
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, password, confirmPassword }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message ?? "Unable to create your account.");
+        return;
+      }
+
+      setSuccess(data.message ?? "Account created successfully.");
+      router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen animate-fade-in bg-white">
       {/* Full-screen auth container */}
@@ -25,7 +71,7 @@ export default function Signup() {
               </p>
             </div>
 
-            <form className="space-y-5 animate-fade-up stagger-2">
+            <form className="space-y-5 animate-fade-up stagger-2" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
@@ -36,6 +82,8 @@ export default function Signup() {
                       id="first-name"
                       name="first-name"
                       type="text"
+                      value={firstName}
+                      onChange={(event) => setFirstName(event.target.value)}
                       required
                       className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
                       placeholder="John"
@@ -52,6 +100,8 @@ export default function Signup() {
                       id="last-name"
                       name="last-name"
                       type="text"
+                      value={lastName}
+                      onChange={(event) => setLastName(event.target.value)}
                       required
                       className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
                       placeholder="Doe"
@@ -69,6 +119,8 @@ export default function Signup() {
                     id="email"
                     name="email"
                     type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
@@ -86,6 +138,8 @@ export default function Signup() {
                     id="password"
                     name="password"
                     type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                     autoComplete="new-password"
                     required
                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
@@ -103,6 +157,8 @@ export default function Signup() {
                     id="confirm-password"
                     name="confirm-password"
                     type="password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
                     autoComplete="new-password"
                     required
                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
@@ -116,6 +172,8 @@ export default function Signup() {
                   id="terms"
                   name="terms"
                   type="checkbox"
+                  checked={termsAccepted}
+                  onChange={(event) => setTermsAccepted(event.target.checked)}
                   required
                   className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
                 />
@@ -131,12 +189,21 @@ export default function Signup() {
                 </label>
               </div>
 
+              {error ? (
+                <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+              ) : null}
+
+              {success ? (
+                <p className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700">{success}</p>
+              ) : null}
+
               <div>
                 <button
                   type="submit"
+                  disabled={loading || !termsAccepted}
                   className="flex w-full justify-center rounded-md bg-gray-950 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
                 >
-                  Create account
+                  {loading ? "Creating account..." : "Create account"}
                 </button>
               </div>
             </form>

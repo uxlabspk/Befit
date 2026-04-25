@@ -1,6 +1,42 @@
+"use client";
+
 import Link from "next/link";
+import { FormEvent, useState } from "react";
 
 export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message ?? "Unable to send reset email.");
+        return;
+      }
+
+      setSuccess(data.message ?? "Please check your email for reset instructions.");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen animate-fade-in bg-white">
       {/* Full-screen auth container */}
@@ -27,11 +63,11 @@ export default function ForgotPassword() {
             <div className="mb-8 animate-fade-up text-center stagger-2">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">Reset password</h2>
               <p className="mt-3 text-sm text-gray-600">
-                Enter your email address and we'll send you a link to reset your password.
+                Enter your email address and we&apos;ll send you a link to reset your password.
               </p>
             </div>
 
-            <form className="space-y-6 animate-fade-up stagger-3">
+            <form className="space-y-6 animate-fade-up stagger-3" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -41,6 +77,8 @@ export default function ForgotPassword() {
                     id="email"
                     name="email"
                     type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
@@ -49,12 +87,21 @@ export default function ForgotPassword() {
                 </div>
               </div>
 
+              {error ? (
+                <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+              ) : null}
+
+              {success ? (
+                <p className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700">{success}</p>
+              ) : null}
+
               <div>
                 <button
                   type="submit"
+                  disabled={loading}
                   className="flex w-full justify-center rounded-md bg-gray-950 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
                 >
-                  Send reset link
+                  {loading ? "Sending..." : "Send reset link"}
                 </button>
               </div>
             </form>
@@ -76,7 +123,7 @@ export default function ForgotPassword() {
                 <div className="text-sm text-gray-600">
                   <p className="font-medium text-gray-900">Having trouble?</p>
                   <p className="mt-1">
-                    If you don't receive an email within a few minutes, check your spam folder.
+                    If you don&apos;t receive an email within a few minutes, check your spam folder.
                   </p>
                 </div>
               </div>
