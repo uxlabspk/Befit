@@ -3,8 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
 enum UserRole {
@@ -109,7 +108,7 @@ enum PaymentStatus {
 }
 
 model User {
-  id                    String                       @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String                       @id @default(uuid())
   email                 String                       @unique
   passwordHash          String
   fullName              String
@@ -146,6 +145,7 @@ model User {
   paymentRecords        PaymentRecord[]
   auditActions          AdminActionLog[]             @relation("AdminActor")
   reviewedEnrollments   ProgramEnrollment[]          @relation("EnrollmentReviewedBy")
+  requestedApprovals    ApprovalRequest[]
   reviewedApprovals     ApprovalRequest[]            @relation("ApprovalReviewedBy")
   reviewedPromotions    PromotionRequest[]           @relation("PromotionReviewedBy")
   approvedCampaigns     PromotionCampaign[]          @relation("CampaignApprovedBy")
@@ -157,8 +157,8 @@ model User {
 }
 
 model UserProfile {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String   @unique @db.ObjectId
+  id                    String   @id @default(uuid())
+  userId                String   @unique
   address               String?
   city                  String?
   country               String?
@@ -170,8 +170,8 @@ model UserProfile {
 }
 
 model ApprovalRequest {
-  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
-  requestedUserId       String?           @db.ObjectId
+  id                    String            @id @default(uuid())
+  requestedUserId       String?          
   applicantName         String
   applicantEmail        String
   applicantAddress      String?
@@ -179,7 +179,7 @@ model ApprovalRequest {
   feeProofUrl           String?
   status                EnrollmentStatus  @default(PENDING)
   rejectionReason       String?
-  reviewedById          String?           @db.ObjectId
+  reviewedById          String?          
   reviewedAt            DateTime?
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @updatedAt
@@ -192,14 +192,14 @@ model ApprovalRequest {
 }
 
 model ProgramEnrollment {
-  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String            @db.ObjectId
+  id                    String            @id @default(uuid())
+  userId                String           
   track                 ProgramTrack
   tier                  MembershipTier    @default(FREE)
   status                EnrollmentStatus  @default(PENDING)
   startsAt              DateTime?
   endsAt                DateTime?
-  reviewedById          String?           @db.ObjectId
+  reviewedById          String?          
   reviewedAt            DateTime?
   rejectionReason       String?
   createdAt             DateTime          @default(now())
@@ -213,8 +213,8 @@ model ProgramEnrollment {
 }
 
 model MembershipSubscription {
-  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String              @db.ObjectId
+  id                    String              @id @default(uuid())
+  userId                String             
   status                SubscriptionStatus  @default(ACTIVE)
   startsAt              DateTime
   endsAt                DateTime
@@ -229,8 +229,8 @@ model MembershipSubscription {
 }
 
 model FeeStatusHistory {
-  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String              @db.ObjectId
+  id                    String              @id @default(uuid())
+  userId                String             
   subscriptionStatus    SubscriptionStatus
   note                  String?
   changedAt             DateTime            @default(now())
@@ -241,7 +241,7 @@ model FeeStatusHistory {
 }
 
 model LevelTier {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String   @id @default(uuid())
   name                  String   @unique
   rankOrder             Int      @unique
   minPoints             Int
@@ -255,10 +255,10 @@ model LevelTier {
 }
 
 model UserPointsProgress {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String   @unique @db.ObjectId
+  id                    String   @id @default(uuid())
+  userId                String   @unique
   totalPoints           Int      @default(0)
-  currentLevelId        String?  @db.ObjectId
+  currentLevelId        String? 
   lastAwardedAt         DateTime?
   updatedAt             DateTime @updatedAt
 
@@ -267,8 +267,8 @@ model UserPointsProgress {
 }
 
 model PointTransaction {
-  id                    String          @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String          @db.ObjectId
+  id                    String          @id @default(uuid())
+  userId                String         
   sourceType            PointSourceType
   sourceRefId           String?
   points                Int
@@ -282,8 +282,8 @@ model PointTransaction {
 }
 
 model FoodLog {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String   @db.ObjectId
+  id                    String   @id @default(uuid())
+  userId                String  
   foodName              String
   calories              Int
   servingNote           String?
@@ -297,8 +297,8 @@ model FoodLog {
 }
 
 model WaterLog {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String   @db.ObjectId
+  id                    String   @id @default(uuid())
+  userId                String  
   milliliters           Int
   pointsAwarded         Int      @default(0)
   loggedAt              DateTime @default(now())
@@ -309,9 +309,9 @@ model WaterLog {
 }
 
 model LeaderboardEntry {
-  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String      @db.ObjectId
-  levelTierId           String?     @db.ObjectId
+  id                    String      @id @default(uuid())
+  userId                String     
+  levelTierId           String?    
   track                 ProgramTrack
   periodYear            Int
   periodMonth           Int
@@ -329,11 +329,11 @@ model LeaderboardEntry {
 }
 
 model GalleryEntry {
-  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String      @id @default(uuid())
   tab                   GalleryTab
   title                 String
   imageUrl              String
-  memberId              String?     @db.ObjectId
+  memberId              String?    
   periodYear            Int?
   periodMonth           Int?
   startsAt              DateTime
@@ -348,7 +348,7 @@ model GalleryEntry {
 }
 
 model Notification {
-  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String              @id @default(uuid())
   type                  NotificationType
   channel               NotificationChannel @default(PUSH)
   title                 String
@@ -363,9 +363,9 @@ model Notification {
 }
 
 model NotificationDelivery {
-  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
-  notificationId        String         @db.ObjectId
-  userId                String         @db.ObjectId
+  id                    String         @id @default(uuid())
+  notificationId        String        
+  userId                String        
   status                DeliveryStatus @default(QUEUED)
   sentAt                DateTime?
   readAt                DateTime?
@@ -379,8 +379,8 @@ model NotificationDelivery {
 }
 
 model CounsellingWallet {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String   @unique @db.ObjectId
+  id                    String   @id @default(uuid())
+  userId                String   @unique
   totalCallsPurchased   Int      @default(0)
   totalCallsUsed        Int      @default(0)
   updatedAt             DateTime @updatedAt
@@ -389,11 +389,11 @@ model CounsellingWallet {
 }
 
 model CounsellingTimeSlot {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String   @id @default(uuid())
   startsAt              DateTime
   endsAt                DateTime
   isActive              Boolean  @default(true)
-  configuredById        String?  @db.ObjectId
+  configuredById        String? 
   createdAt             DateTime @default(now())
 
   configuredBy          User?    @relation("SlotConfiguredBy", fields: [configuredById], references: [id])
@@ -403,10 +403,10 @@ model CounsellingTimeSlot {
 }
 
 model CounsellingBooking {
-  id                    String                   @id @default(auto()) @map("_id") @db.ObjectId
-  memberId              String                   @db.ObjectId
-  slotId                String                   @db.ObjectId
-  coachId               String?                  @db.ObjectId
+  id                    String                   @id @default(uuid())
+  memberId              String                  
+  slotId                String                  
+  coachId               String?                 
   status                CounsellingBookingStatus @default(REQUESTED)
   reminderSentAt        DateTime?
   notes                 String?
@@ -421,8 +421,8 @@ model CounsellingBooking {
 }
 
 model FeedPost {
-  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
-  authorId              String         @db.ObjectId
+  id                    String         @id @default(uuid())
+  authorId              String        
   caption               String?
   mediaUrl              String?
   visibility            PostVisibility @default(PUBLIC)
@@ -435,8 +435,8 @@ model FeedPost {
 }
 
 model StatusStory {
-  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
-  authorId              String    @db.ObjectId
+  id                    String    @id @default(uuid())
+  authorId              String   
   type                  StoryType
   textContent           String?
   mediaUrl              String?
@@ -449,9 +449,9 @@ model StatusStory {
 }
 
 model PostLike {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  postId                String   @db.ObjectId
-  userId                String   @db.ObjectId
+  id                    String   @id @default(uuid())
+  postId                String  
+  userId                String  
   createdAt             DateTime @default(now())
 
   post                  FeedPost @relation(fields: [postId], references: [id])
@@ -462,9 +462,9 @@ model PostLike {
 }
 
 model UserFollow {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  followerId            String   @db.ObjectId
-  followingId           String   @db.ObjectId
+  id                    String   @id @default(uuid())
+  followerId            String  
+  followingId           String  
   createdAt             DateTime @default(now())
 
   follower              User     @relation("Follower", fields: [followerId], references: [id])
@@ -475,7 +475,7 @@ model UserFollow {
 }
 
 model BusinessPartner {
-  id                    String             @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String             @id @default(uuid())
   name                  String
   contactEmail          String?
   contactPhone          String?
@@ -486,14 +486,14 @@ model BusinessPartner {
 }
 
 model PromotionRequest {
-  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
-  partnerId             String?                @db.ObjectId
-  requestedByUserId     String?                @db.ObjectId
+  id                    String                 @id @default(uuid())
+  partnerId             String?               
+  requestedByUserId     String?               
   productName           String
   productImageUrl       String
   productDescription    String
   status                PromotionRequestStatus @default(PENDING)
-  reviewedById          String?                @db.ObjectId
+  reviewedById          String?               
   reviewedAt            DateTime?
   rejectionReason       String?
   createdAt             DateTime               @default(now())
@@ -507,9 +507,9 @@ model PromotionRequest {
 }
 
 model PromotionCampaign {
-  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
-  requestId             String                 @unique @db.ObjectId
-  approvedById          String?                @db.ObjectId
+  id                    String                 @id @default(uuid())
+  requestId             String                 @unique
+  approvedById          String?               
   title                 String
   description           String
   imageUrl              String
@@ -526,9 +526,9 @@ model PromotionCampaign {
 }
 
 model PromotionDelivery {
-  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
-  campaignId            String         @db.ObjectId
-  userId                String         @db.ObjectId
+  id                    String         @id @default(uuid())
+  campaignId            String        
+  userId                String        
   status                DeliveryStatus @default(QUEUED)
   sentAt                DateTime?
   clickedAt             DateTime?
@@ -541,14 +541,14 @@ model PromotionDelivery {
 }
 
 model StoreProduct {
-  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String            @id @default(uuid())
   name                  String
   description           String
   imageUrl              String?
   pricePkr              Int?
   isActive              Boolean           @default(true)
-  introducedById        String?           @db.ObjectId
-  promotionCampaignId   String?           @db.ObjectId
+  introducedById        String?          
+  promotionCampaignId   String?          
   createdAt             DateTime          @default(now())
 
   introducedBy          User?             @relation("ProductIntroducedBy", fields: [introducedById], references: [id])
@@ -558,8 +558,8 @@ model StoreProduct {
 }
 
 model PaymentRecord {
-  id                    String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String        @db.ObjectId
+  id                    String        @id @default(uuid())
+  userId                String       
   stripeEventId         String?       @unique
   stripePaymentIntentId String?       @unique
   amountPkr             Int
@@ -572,8 +572,8 @@ model PaymentRecord {
 }
 
 model AdminActionLog {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  adminId               String   @db.ObjectId
+  id                    String   @id @default(uuid())
+  adminId               String  
   action                String
   targetType            String
   targetId              String?
