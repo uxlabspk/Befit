@@ -41,7 +41,7 @@ export default function Signup() {
       }
 
       setSuccess(data.message ?? "Account created successfully.");
-      router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+      //router.push(`/verify-email?email=${encodeURIComponent(email)}`);
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

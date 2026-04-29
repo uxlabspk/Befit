@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const verifyLink = buildVerifyEmailLink(rawToken);
+    const verifyLink = buildVerifyEmailLink(rawToken, user.email);
     const emailSent = await sendEmail({
       to: user.email,
       subject: "Verify your BE-FIT account",

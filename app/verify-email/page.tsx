@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function VerifyEmail() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const token = useMemo(() => searchParams.get("token") ?? "", [searchParams]);
-  const initialEmail = useMemo(() => searchParams.get("email") ?? "", [searchParams]);
-  const [email, setEmail] = useState(initialEmail);
+  const urlEmail = useMemo(() => searchParams.get("email") ?? "", [searchParams]);
+  const [email, setEmail] = useState(urlEmail);
   const [loadingVerify, setLoadingVerify] = useState(false);
   const [loadingResend, setLoadingResend] = useState(false);
   const [error, setError] = useState("");
@@ -34,6 +35,9 @@ export default function VerifyEmail() {
       }
 
       setSuccess(data.message ?? "Email verified successfully. You can now sign in.");
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -42,7 +46,8 @@ export default function VerifyEmail() {
   }
 
   async function handleResend() {
-    if (!email) {
+    const emailToUse = email || urlEmail;
+    if (!emailToUse) {
       setError("Please provide your email address.");
       return;
     }
@@ -55,7 +60,7 @@ export default function VerifyEmail() {
       const response = await fetch("/api/auth/resend-verification", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: emailToUse }),
       });
       const data = await response.json();
 
@@ -140,14 +145,16 @@ export default function VerifyEmail() {
                 <p className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700">{success}</p>
               ) : null}
 
-              <button
-                type="button"
-                onClick={handleVerifyNow}
-                disabled={loadingVerify || !token}
-                className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {loadingVerify ? "Verifying..." : "Verify email now"}
-              </button>
+              {token ? (
+                <button
+                  type="button"
+                  onClick={handleVerifyNow}
+                  disabled={loadingVerify}
+                  className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {loadingVerify ? "Verifying..." : "Verify email now"}
+                </button>
+              ) : null}
 
               <button
                 type="button"

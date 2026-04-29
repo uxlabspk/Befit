@@ -56,9 +56,15 @@ export async function sendEmail(input: SendEmailInput): Promise<boolean> {
   return true;
 }
 
-export function buildVerifyEmailLink(token: string): string {
+export function buildVerifyEmailLink(token: string, email?: string): string {
   const baseUrl = process.env.APP_BASE_URL ?? "http://localhost:3000";
-  return `${baseUrl}/verify-email?token=${encodeURIComponent(token)}`;
+  const url = new URL(baseUrl);
+  url.pathname = "/verify-email";
+  url.searchParams.set("token", token);
+  if (email) {
+    url.searchParams.set("email", email);
+  }
+  return url.toString();
 }
 
 export function buildResetPasswordLink(token: string): string {

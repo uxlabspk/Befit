@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const verifyLink = buildVerifyEmailLink(rawToken);
+    const verifyLink = buildVerifyEmailLink(rawToken, user.email);
 
     await sendEmail({
       to: user.email,
