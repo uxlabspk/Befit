@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { SignJWT } from "jose";
+import { SignJWT, jwtVerify } from "jose";
 import crypto from "crypto";
 import { cookies } from "next/headers";
 
@@ -69,4 +69,26 @@ export async function setSessionCookie(token: string, rememberMe?: boolean): Pro
     path: "/",
     maxAge: maxAgeDays * 24 * 60 * 60,
   });
+}
+
+export async function verifySession(): Promise<{
+  userId: string;
+  email: string;
+  role: string;
+} | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+
+  if (!token) return null;
+
+  try {
+    const { payload } = await jwtVerify(token, getJwtSecret());
+    return {
+      userId: payload.sub as string,
+      email: payload.email as string,
+      role: payload.role as string,
+    };
+  } catch {
+    return null;
+  }
 }
