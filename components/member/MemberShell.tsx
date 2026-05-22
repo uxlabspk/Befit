@@ -1,7 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { formatLabel, getInitials } from "@/lib/member";
-import { memberMutedCardClassName, memberPanelClassName } from "./memberUi";
+import {
+  memberLabelClassName,
+  memberMutedCardClassName,
+  memberPanelClassName,
+  memberSectionHeadingClassName,
+  memberValueClassName,
+} from "./memberUi";
 
 type MemberShellProps = {
   title: string;
@@ -32,61 +38,74 @@ const navItems = [
   { key: "settings", label: "Settings", href: "/settings" },
 ] as const;
 
-export default function MemberShell({ title, subtitle, activeRoute, user, stats, children }: MemberShellProps) {
+export default function MemberShell({
+  title,
+  subtitle,
+  activeRoute,
+  user,
+  stats,
+  children,
+}: MemberShellProps) {
   return (
     <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <div className="mx-auto flex max-w-[1600px] gap-0 lg:gap-8">
-        <aside className="hidden min-h-screen w-80 shrink-0 border-r border-[var(--border)] bg-white/95 px-6 py-8 lg:sticky lg:top-0 lg:block">
-          <div className="flex h-full flex-col">
+      <div className="mx-auto flex max-w-[1600px]">
+        {/* ── Sidebar ── */}
+        <aside className="hidden min-h-screen w-72 shrink-0 border-r border-[var(--border)] bg-white lg:sticky lg:top-0 lg:flex lg:flex-col">
+          <div className="flex flex-1 flex-col gap-6 overflow-y-auto px-5 py-7">
+            {/* Brand */}
             <div>
-              <Link href="/" className="text-lg font-bold tracking-tighter">
+              <Link href="/" className="text-base font-bold tracking-tight">
                 BE-FIT
               </Link>
-              <div className="mt-1 text-xs uppercase tracking-[0.3em] text-[var(--foreground)]/40">
-                Member area
-              </div>
+              <p className={`mt-0.5 ${memberLabelClassName}`}>Member area</p>
             </div>
 
-            <div className={memberPanelClassName + " mt-8"}>
+            {/* User card */}
+            <div className={memberPanelClassName}>
               <div className="flex items-center gap-3">
                 {user.avatarUrl ? (
                   <img
                     src={user.avatarUrl}
                     alt={user.fullName ?? user.email}
-                    className="h-12 w-12 rounded-full border border-[var(--border)] object-cover"
+                    className="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
                   />
                 ) : (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--muted)] text-sm font-semibold">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--muted)] text-xs font-semibold">
                     {getInitials(user.fullName)}
                   </div>
                 )}
-                <div>
-                  <div className="text-sm font-semibold">{user.fullName ?? user.email}</div>
-                  <div className="text-xs text-[var(--foreground)]/50">{user.role}</div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold">
+                    {user.fullName ?? user.email}
+                  </p>
+                  <p className="text-xs text-[var(--foreground)]/50 capitalize">
+                    {user.role.toLowerCase()}
+                  </p>
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-4 grid grid-cols-2 gap-2">
                 <div className={memberMutedCardClassName}>
-                  <div className="text-xs uppercase tracking-[0.3em] text-[var(--foreground)]/40">Points</div>
-                  <div className="mt-2 text-xl font-bold">{stats.points}</div>
+                  <p className={memberLabelClassName}>Points</p>
+                  <p className={`mt-1.5 ${memberValueClassName}`}>{stats.points}</p>
                 </div>
                 <div className={memberMutedCardClassName}>
-                  <div className="text-xs uppercase tracking-[0.3em] text-[var(--foreground)]/40">Level</div>
-                  <div className="mt-2 text-xl font-bold">{stats.levelName}</div>
+                  <p className={memberLabelClassName}>Level</p>
+                  <p className={`mt-1.5 text-lg font-bold tracking-tight`}>{stats.levelName}</p>
                 </div>
               </div>
             </div>
 
-            <nav className="mt-8 space-y-2">
+            {/* Nav */}
+            <nav className="space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.key}
                   href={item.href}
-                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition ${
+                  className={`flex items-center rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-colors ${
                     item.key === activeRoute
                       ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
-                      : "border-[var(--border)] bg-white text-[var(--foreground)]/70 hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
+                      : "border-transparent text-[var(--foreground)]/60 hover:border-[var(--border)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
                   }`}
                 >
                   {item.label}
@@ -94,53 +113,54 @@ export default function MemberShell({ title, subtitle, activeRoute, user, stats,
               ))}
             </nav>
 
-            <div className="mt-8 space-y-4">
-              <div className={memberPanelClassName}>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">
-                  Progress
-                </div>
-                <div className="mt-3 text-sm font-medium">{stats.progressLabel}</div>
-                <div className="mt-4 h-2 rounded-full bg-[var(--muted)]">
-                  <div className="h-2 rounded-full bg-[var(--foreground)]" style={{ width: `${stats.progressPercent}%` }} />
-                </div>
-                <div className="mt-3 text-xs text-[var(--foreground)]/50">{stats.monthLabel}</div>
+            {/* Progress */}
+            <div className={memberPanelClassName}>
+              <p className={memberLabelClassName}>Progress</p>
+              <p className="mt-2 text-sm font-medium">{stats.progressLabel}</p>
+              <div className="mt-3 h-1.5 rounded-full bg-[var(--muted)]">
+                <div
+                  className="h-1.5 rounded-full bg-[var(--foreground)] transition-all"
+                  style={{ width: `${Math.min(stats.progressPercent, 100)}%` }}
+                />
               </div>
+              <p className="mt-2 text-xs text-[var(--foreground)]/40">{stats.monthLabel}</p>
+            </div>
 
-              <div className={memberPanelClassName}>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">
-                  Member snapshot
-                </div>
-                <div className="mt-4 space-y-3 text-sm">
-                  <Row label="Track" value={formatLabel(stats.programTrack)} />
-                  <Row label="Tier" value={formatLabel(stats.membershipTier)} />
-                  <Row label="Calls" value={`${stats.remainingCalls} left`} />
-                </div>
+            {/* Snapshot */}
+            <div className={memberPanelClassName}>
+              <p className={memberLabelClassName}>Snapshot</p>
+              <div className="mt-3 space-y-2.5 text-sm">
+                <Row label="Track" value={formatLabel(stats.programTrack)} />
+                <Row label="Tier" value={formatLabel(stats.membershipTier)} />
+                <Row label="Calls" value={`${stats.remainingCalls} left`} />
               </div>
             </div>
           </div>
         </aside>
 
+        {/* ── Main content ── */}
         <section className="min-w-0 flex-1">
-          <div className="border-b border-[var(--border)] bg-white/90 px-6 py-5 backdrop-blur-sm lg:hidden">
+          {/* Mobile top bar */}
+          <div className="border-b border-[var(--border)] bg-white px-5 py-4 lg:hidden">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <div className="text-lg font-bold tracking-tighter">BE-FIT</div>
-                <div className="text-xs uppercase tracking-[0.3em] text-[var(--foreground)]/40">Member area</div>
+                <p className="text-sm font-bold tracking-tight">BE-FIT</p>
+                <p className={memberLabelClassName}>Member area</p>
               </div>
               <div className="text-right">
-                <div className="text-sm font-semibold">{user.fullName ?? user.email}</div>
-                <div className="text-xs text-[var(--foreground)]/50">{user.role}</div>
+                <p className="text-sm font-semibold">{user.fullName ?? user.email}</p>
+                <p className="text-xs text-[var(--foreground)]/50 capitalize">{user.role.toLowerCase()}</p>
               </div>
             </div>
-            <nav className="mt-4 flex gap-2 overflow-x-auto pb-1">
+            <nav className="mt-3 flex gap-2 overflow-x-auto pb-0.5">
               {navItems.map((item) => (
                 <Link
                   key={item.key}
                   href={item.href}
-                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
+                  className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     item.key === activeRoute
                       ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
-                      : "border-[var(--border)] bg-white text-[var(--foreground)]/70"
+                      : "border-[var(--border)] text-[var(--foreground)]/60"
                   }`}
                 >
                   {item.label}
@@ -149,20 +169,13 @@ export default function MemberShell({ title, subtitle, activeRoute, user, stats,
             </nav>
           </div>
 
-          <div className="border-b border-[var(--border)]">
-            <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-              <div className="max-w-3xl">
-                <div className="animate-fade-up text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">
-                  BE-FIT member panel
-                </div>
-                <h1 className="mt-4 animate-fade-up text-4xl font-bold tracking-tighter sm:text-5xl">
-                  {title}
-                </h1>
-                <p className="mt-4 max-w-2xl animate-fade-up text-base leading-7 text-[var(--foreground)]/60">
-                  {subtitle}
-                </p>
-              </div>
-            </div>
+          {/* Page header */}
+          <div className="border-b border-[var(--border)] bg-white px-6 py-8 lg:px-8">
+            <p className={memberLabelClassName}>BE-FIT member panel</p>
+            <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
+            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[var(--foreground)]/55">
+              {subtitle}
+            </p>
           </div>
 
           {children}
@@ -174,9 +187,9 @@ export default function MemberShell({ title, subtitle, activeRoute, user, stats,
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-[var(--border)] pb-3 last:border-b-0 last:pb-0">
+    <div className="flex items-center justify-between gap-3">
       <span className="text-[var(--foreground)]/50">{label}</span>
-      <span className="font-medium text-[var(--foreground)]">{value}</span>
+      <span className="font-medium">{value}</span>
     </div>
   );
 }
