@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BE-FIT | Premium Fitness Landing Page",
-  description: "A premium fitness landing page with AI coaching, gamified tracking, and bold conversion-focused design.",
+  title: "BE-FIT | Fitness Platform",
+  description: "BE-FIT member and marketing experience with training, tracking, and account management.",
 };
 
 export default function RootLayout({

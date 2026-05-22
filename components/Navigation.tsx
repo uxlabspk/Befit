@@ -71,6 +71,13 @@ export default function Navigation() {
                       {user.fullName ?? user.email}
                     </div>
                     <a
+                      href="/dashboard"
+                      className="block px-4 py-2 text-sm text-[var(--foreground)]/70 hover:bg-[var(--foreground)]/5"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </a>
+                    <a
                       href="/profile"
                       className="block px-4 py-2 text-sm text-[var(--foreground)]/70 hover:bg-[var(--foreground)]/5"
                       onClick={() => setDropdownOpen(false)}
