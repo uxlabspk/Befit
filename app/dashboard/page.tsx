@@ -36,7 +36,7 @@ function StatCard({
     <article className={memberPanelClassName}>
       <p className={memberLabelClassName}>{label}</p>
       <p className={`mt-2 ${memberValueClassName}`}>{value}</p>
-      <p className="mt-1 text-xs text-[var(--foreground)]/50 leading-relaxed">{detail}</p>
+      <p className="mt-1 text-sm text-[var(--foreground)]/[0.6] leading-relaxed">{detail}</p>
     </article>
   );
 }
@@ -123,16 +123,16 @@ export default async function DashboardPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className={memberLabelClassName}>Training progress</p>
-                  <h2 className="mt-2 text-lg font-semibold tracking-tight">
+                  <h2 className="mt-2 text-lg font-bold tracking-tighter">
                     {formatLabel(member.derived.programTrack)}
                   </h2>
-                  <p className="mt-0.5 text-sm text-[var(--foreground)]/55">
+                  <p className="mt-0.5 text-sm text-[var(--foreground)]/[0.6]">
                     {member.derived.membershipTier
                       ? `${formatLabel(member.derived.membershipTier)} member`
                       : "No membership tier set"}
                   </p>
                 </div>
-                <span className="inline-flex shrink-0 items-center rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--foreground)]/60">
+                <span className="inline-flex shrink-0 items-center rounded-full border border-[var(--border)] px-3 py-1 text-sm font-medium text-[var(--foreground)]/[0.6]">
                   {currentMonth}
                 </span>
               </div>
@@ -177,11 +177,11 @@ export default async function DashboardPage() {
                       >
                         <div className="min-w-0">
                           <p className="truncate text-sm font-medium">{log.foodName}</p>
-                          <p className="text-xs text-[var(--foreground)]/50">
+                          <p className="text-sm text-[var(--foreground)]/[0.6]">
                             {log.servingNote ?? formatDateTime(log.loggedAt)}
                           </p>
                         </div>
-                        <div className="shrink-0 text-right text-xs text-[var(--foreground)]/60">
+                        <div className="shrink-0 text-right text-sm text-[var(--foreground)]/[0.6]">
                           <p>{log.calories} cal</p>
                           <p>+{log.pointsAwarded} pts</p>
                         </div>
@@ -204,11 +204,11 @@ export default async function DashboardPage() {
                       >
                         <div>
                           <p className="text-sm font-medium">{log.milliliters} ml</p>
-                          <p className="text-xs text-[var(--foreground)]/50">
+                          <p className="text-sm text-[var(--foreground)]/[0.6]">
                             {formatDateTime(log.loggedAt)}
                           </p>
                         </div>
-                        <div className="shrink-0 text-right text-xs text-[var(--foreground)]/60">
+                        <div className="shrink-0 text-right text-sm text-[var(--foreground)]/[0.6]">
                           <p>Hydration</p>
                           <p>+{log.pointsAwarded} pts</p>
                         </div>
@@ -226,7 +226,7 @@ export default async function DashboardPage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <h2 className={memberSectionHeadingClassName}>Leaderboard</h2>
-                  <p className="mt-0.5 text-xs text-[var(--foreground)]/50">
+                  <p className="mt-0.5 text-sm text-[var(--foreground)]/[0.6]">
                     {member.derived.programTrack
                       ? `${formatLabel(member.derived.programTrack)} track · ${currentMonth}`
                       : "Track not set yet"}
@@ -249,7 +249,7 @@ export default async function DashboardPage() {
                           <p className="text-sm font-medium">
                             {entry.user.fullName ?? "Member"}
                           </p>
-                          <p className="text-xs text-[var(--foreground)]/50">
+                          <p className="text-sm text-[var(--foreground)]/[0.6]">
                             {entry.levelTier?.name ?? "Level pending"}
                           </p>
                         </div>
@@ -299,10 +299,10 @@ export default async function DashboardPage() {
                       <p className="text-sm font-semibold">
                         {formatDateTime(booking.slot.startsAt)}
                       </p>
-                      <p className="mt-1 text-xs text-[var(--foreground)]/55">
+                      <p className="mt-1 text-sm text-[var(--foreground)]/[0.6]">
                         {booking.slot.isActive ? "Confirmed" : "Inactive"} · {booking.status}
                       </p>
-                      <p className="mt-1.5 text-xs text-[var(--foreground)]/40">
+                      <p className="mt-1.5 text-sm text-[var(--foreground)]/[0.4]">
                         Coach: {booking.coach?.fullName ?? "Unassigned"}
                       </p>
                     </div>
@@ -324,7 +324,7 @@ export default async function DashboardPage() {
                       className="border-b border-[var(--border)] pb-3 last:border-0 last:pb-0"
                     >
                       <p className="text-sm font-medium">{item.notification.title}</p>
-                      <p className="mt-0.5 text-xs text-[var(--foreground)]/50">
+                      <p className="mt-0.5 text-sm text-[var(--foreground)]/[0.6]">
                         {item.notification.body}
                       </p>
                     </div>

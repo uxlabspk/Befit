@@ -54,7 +54,7 @@ export default function MemberShell({
           <div className="flex flex-1 flex-col gap-6 overflow-y-auto px-5 py-7">
             {/* Brand */}
             <div>
-              <Link href="/" className="text-base font-bold tracking-tight">
+              <Link href="/" className="text-lg font-bold tracking-tighter">
                 BE-FIT
               </Link>
               <p className={`mt-0.5 ${memberLabelClassName}`}>Member area</p>
@@ -78,7 +78,7 @@ export default function MemberShell({
                   <p className="truncate text-sm font-semibold">
                     {user.fullName ?? user.email}
                   </p>
-                  <p className="text-xs text-[var(--foreground)]/50 capitalize">
+                  <p className="text-sm text-[var(--foreground)]/[0.6] capitalize">
                     {user.role.toLowerCase()}
                   </p>
                 </div>
@@ -91,7 +91,7 @@ export default function MemberShell({
                 </div>
                 <div className={memberMutedCardClassName}>
                   <p className={memberLabelClassName}>Level</p>
-                  <p className={`mt-1.5 text-lg font-bold tracking-tight`}>{stats.levelName}</p>
+                  <p className={`mt-1.5 text-lg font-bold tracking-tighter`}>{stats.levelName}</p>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function MemberShell({
                   className={`flex items-center rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-colors ${
                     item.key === activeRoute
                       ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
-                      : "border-transparent text-[var(--foreground)]/60 hover:border-[var(--border)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
+                      : "border-transparent text-[var(--foreground)]/[0.6] hover:border-[var(--border)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
                   }`}
                 >
                   {item.label}
@@ -123,7 +123,7 @@ export default function MemberShell({
                   style={{ width: `${Math.min(stats.progressPercent, 100)}%` }}
                 />
               </div>
-              <p className="mt-2 text-xs text-[var(--foreground)]/40">{stats.monthLabel}</p>
+              <p className="mt-2 text-sm text-[var(--foreground)]/[0.6]">{stats.monthLabel}</p>
             </div>
 
             {/* Snapshot */}
@@ -144,12 +144,12 @@ export default function MemberShell({
           <div className="border-b border-[var(--border)] bg-white px-5 py-4 lg:hidden">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-bold tracking-tight">BE-FIT</p>
+                <p className="text-sm font-bold tracking-tighter">BE-FIT</p>
                 <p className={memberLabelClassName}>Member area</p>
               </div>
               <div className="text-right">
                 <p className="text-sm font-semibold">{user.fullName ?? user.email}</p>
-                <p className="text-xs text-[var(--foreground)]/50 capitalize">{user.role.toLowerCase()}</p>
+                <p className="text-sm text-[var(--foreground)]/[0.6] capitalize">{user.role.toLowerCase()}</p>
               </div>
             </div>
             <nav className="mt-3 flex gap-2 overflow-x-auto pb-0.5">
@@ -160,7 +160,7 @@ export default function MemberShell({
                   className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     item.key === activeRoute
                       ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
-                      : "border-[var(--border)] text-[var(--foreground)]/60"
+                      : "border-[var(--border)] text-[var(--foreground)]/[0.6]"
                   }`}
                 >
                   {item.label}
@@ -172,8 +172,8 @@ export default function MemberShell({
           {/* Page header */}
           <div className="border-b border-[var(--border)] bg-white px-6 py-8 lg:px-8">
             <p className={memberLabelClassName}>BE-FIT member panel</p>
-            <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
-            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[var(--foreground)]/55">
+            <h1 className="mt-2 text-2xl font-bold tracking-tighter sm:text-3xl">{title}</h1>
+            <p className="mt-1.5 max-w-2xl text-base leading-relaxed text-[var(--foreground)]/[0.6]">
               {subtitle}
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function MemberShell({
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-[var(--foreground)]/50">{label}</span>
+      <span className="text-[var(--foreground)]/[0.6]">{label}</span>
       <span className="font-medium">{value}</span>
     </div>
   );

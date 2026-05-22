@@ -79,7 +79,7 @@ export default async function SettingsPage() {
 
           <aside className="space-y-6 xl:col-span-4">
             <section className={memberPanelClassName}>
-              <h2 className="text-lg font-semibold tracking-tight">Live snapshot</h2>
+              <h2 className="text-lg font-bold tracking-tighter">Live snapshot</h2>
               <div className="mt-5 space-y-4 text-sm">
                 <Row label="Member" value={member.user.fullName ?? member.user.email} />
                 <Row label="Email" value={member.user.email} />
@@ -91,8 +91,8 @@ export default async function SettingsPage() {
             </section>
 
             <section className={memberPanelClassName}>
-              <h2 className="text-lg font-semibold tracking-tight">What you can edit</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--foreground)]/60">
+              <h2 className="text-lg font-bold tracking-tighter">What you can edit</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--foreground)]/[0.6]">
                 <li>Identity and contact fields used across the member area.</li>
                 <li>Address and location details stored in your live profile record.</li>
                 <li>Training track and password with the current password check.</li>
@@ -108,7 +108,7 @@ export default async function SettingsPage() {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-[var(--border)] pb-3 last:border-b-0 last:pb-0">
-      <span className="text-[var(--foreground)]/50">{label}</span>
+      <span className="text-[var(--foreground)]/[0.6]">{label}</span>
       <span className="font-medium text-[var(--foreground)]">{value}</span>
     </div>
   );

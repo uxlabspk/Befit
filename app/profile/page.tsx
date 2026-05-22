@@ -22,7 +22,7 @@ function Stat({
       <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">
         {label}
       </div>
-      <div className="mt-3 text-2xl font-bold tracking-tight">{value}</div>
+      <div className="mt-3 text-3xl font-bold tracking-tighter">{value}</div>
     </div>
   );
 }
@@ -87,8 +87,8 @@ export default async function ProfilePage() {
                   <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">
                     Account
                   </div>
-                  <h1 className="mt-2 text-3xl font-bold tracking-tight">{member.user.fullName ?? "Member"}</h1>
-                  <p className="mt-1 text-sm text-[var(--foreground)]/60">{member.user.email}</p>
+                  <h1 className="mt-2 text-3xl font-bold tracking-tighter">{member.user.fullName ?? "Member"}</h1>
+                  <p className="mt-1 text-sm text-[var(--foreground)]/[0.6]">{member.user.email}</p>
                 </div>
               </div>
 
@@ -121,7 +121,7 @@ export default async function ProfilePage() {
 
           <div className="space-y-6 xl:col-span-7">
             <section className={memberPanelClassName}>
-              <h2 className="text-lg font-semibold tracking-tight">Program details</h2>
+              <h2 className="text-lg font-bold tracking-tighter">Program details</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <Info label="Current track" value={formatLabel(member.derived.programTrack)} />
                 <Info label="Membership tier" value={formatLabel(member.derived.membershipTier)} />
@@ -133,7 +133,7 @@ export default async function ProfilePage() {
             </section>
 
             <section className={memberPanelClassName}>
-              <h2 className="text-lg font-semibold tracking-tight">Profile information</h2>
+              <h2 className="text-lg font-bold tracking-tighter">Profile information</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <Info label="Address" value={member.profile?.address ?? "—"} />
                 <Info label="City" value={member.profile?.city ?? "—"} />
@@ -145,7 +145,7 @@ export default async function ProfilePage() {
             </section>
 
             <section className={memberPanelClassName}>
-              <h2 className="text-lg font-semibold tracking-tight">Recent activity</h2>
+              <h2 className="text-lg font-bold tracking-tighter">Recent activity</h2>
               <div className="mt-5 grid gap-4 lg:grid-cols-2">
                 <div>
                   <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40">Food logs</h3>
@@ -155,16 +155,16 @@ export default async function ProfilePage() {
                         <div className="flex items-center justify-between gap-4">
                           <div>
                             <div className="font-medium">{log.foodName}</div>
-                            <div className="text-sm text-[var(--foreground)]/50">{formatDateTime(log.loggedAt)}</div>
+                            <div className="text-sm text-[var(--foreground)]/[0.6]">{formatDateTime(log.loggedAt)}</div>
                           </div>
-                          <div className="text-right text-sm text-[var(--foreground)]/70">
+                          <div className="text-right text-sm text-[var(--foreground)]/[0.6]">
                             <div>{log.calories} cal</div>
                             <div>+{log.pointsAwarded} pts</div>
                           </div>
                         </div>
                       </div>
                     )) : (
-                      <div className="text-sm text-[var(--foreground)]/50">No food logs yet.</div>
+                      <div className="text-sm text-[var(--foreground)]/[0.6]">No food logs yet.</div>
                     )}
                   </div>
                 </div>
@@ -175,12 +175,12 @@ export default async function ProfilePage() {
                     {member.bookings.length ? member.bookings.map((booking) => (
                       <div key={booking.id} className="rounded-md border border-[var(--border)] px-4 py-3">
                         <div className="font-medium">{formatDateTime(booking.slot.startsAt)}</div>
-                        <div className="mt-1 text-sm text-[var(--foreground)]/50">
+                        <div className="mt-1 text-sm text-[var(--foreground)]/[0.6]">
                           {booking.status} • Coach {booking.coach?.fullName ?? "unassigned"}
                         </div>
                       </div>
                     )) : (
-                      <div className="text-sm text-[var(--foreground)]/50">No bookings yet.</div>
+                      <div className="text-sm text-[var(--foreground)]/[0.6]">No bookings yet.</div>
                     )}
                   </div>
                 </div>

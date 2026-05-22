@@ -5,10 +5,10 @@ export const memberMutedCardClassName =
   "rounded-lg border border-[var(--border)] bg-[var(--muted)] p-4";
 
 export const memberLabelClassName =
-  "text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--foreground)]/40";
+  "text-xs font-semibold uppercase tracking-[0.3em] text-[var(--foreground)]/40";
 
 export const memberSectionHeadingClassName =
-  "text-sm font-semibold tracking-tight text-[var(--foreground)]";
+  "text-lg font-bold tracking-tighter text-[var(--foreground)]";
 
 export const memberValueClassName =
-  "text-2xl font-bold tracking-tight text-[var(--foreground)]";
+  "text-3xl font-bold tracking-tighter text-[var(--foreground)]";
